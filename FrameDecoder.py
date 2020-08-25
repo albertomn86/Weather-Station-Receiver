@@ -1,8 +1,8 @@
+from Packet import Packet
 
 class FrameDecoder(object):
 
     def __init__(self, frame):
-
         if self.IsValid(frame):
             self._frame = frame
         else:
@@ -11,6 +11,8 @@ class FrameDecoder(object):
 
     @staticmethod
     def IsValid(testFrame):
+        if len(testFrame) <= 6:
+            return False
 
         if not testFrame.endswith('#'):
             return False
@@ -19,3 +21,12 @@ class FrameDecoder(object):
             return False
 
         return True
+
+
+    def GetPacket(self):
+        packet = Packet()
+        packet.Type = self._frame[0]
+        packet.From = self._frame[1:5]
+        packet.Payload = self._frame[5:-1]
+
+        return packet

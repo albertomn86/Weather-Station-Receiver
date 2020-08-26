@@ -8,7 +8,7 @@ from Config import Config
 def test_MustAssertIfConfigFileDoesntExist():
 
     with pytest.raises(FileNotFoundError, match=r".* fakefile.yml"):
-        config = Config("fakefile.yml")
+        Config("fakefile.yml")
 
 
 def test_LoadedConfigMustContainTwoDevices():

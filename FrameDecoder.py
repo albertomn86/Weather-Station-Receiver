@@ -24,9 +24,6 @@ class FrameDecoder(object):
 
 
     def GetPacket(self):
-        packet = Packet()
-        packet.Type = self._frame[0]
-        packet.From = self._frame[1:5]
-        packet.Payload = self._frame[5:-1]
+        packet = Packet(self._frame[:-1])
 
         return packet

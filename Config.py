@@ -1,4 +1,4 @@
-import yaml
+from yaml import safe_load, YAMLError
 from os import path
 
 
@@ -11,8 +11,8 @@ class Config(object):
 
         with open(file, 'r') as stream:
             try:
-                self._config = yaml.safe_load(stream)
-            except yaml.YAMLError:
+                self._config = safe_load(stream)
+            except YAMLError:
                 raise Exception("Invalif config file")
 
     def GetDevices(self):

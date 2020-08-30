@@ -7,7 +7,7 @@ class FrameDecoder(object):
         if self.IsValid(frame):
             self._frame = frame
         else:
-            raise ValueError("Invalid frame {0}".format(frame))
+            raise ValueError(f"Invalid frame: {frame}")
 
     @staticmethod
     def IsValid(testFrame):

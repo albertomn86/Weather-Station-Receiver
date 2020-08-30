@@ -1,8 +1,8 @@
-import sys
-import os
-import pytest
-sys.path.append(os.path.abspath("./"))
+from sys import path as sysPath
+from os import path as osPath
+sysPath.append(osPath.abspath("./"))
 from Config import Config
+import pytest
 
 
 def test_MustAssertIfConfigFileDoesntExist():
@@ -18,3 +18,5 @@ def test_LoadedConfigMustContainTwoDevices():
     devices = config.GetDevices()
 
     assert len(devices) == 2
+    assert "A3F6" in devices
+    assert "80D4" in devices

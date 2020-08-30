@@ -4,7 +4,7 @@ from os import path
 
 class Config(object):
 
-    def __init__(self, file):
+    def __init__(self, file="Config.yml"):
 
         if not path.exists(file):
             raise FileNotFoundError(f"Config file not found: {file}")
@@ -13,7 +13,7 @@ class Config(object):
             try:
                 self._config = safe_load(stream)
             except YAMLError:
-                raise Exception("Invalif config file")
+                raise Exception(f"Invalid configuration file: {file}")
 
     def GetDevices(self):
 

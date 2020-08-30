@@ -1,7 +1,4 @@
 from pytest import raises
-from sys import path as sysPath
-from os import path as osPath
-sysPath.append(osPath.abspath("./"))
 from PayloadDecoder import PayloadDecoder
 from Packet import Packet
 

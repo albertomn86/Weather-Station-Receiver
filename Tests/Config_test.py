@@ -1,14 +1,17 @@
-from sys import path as sysPath
-from os import path as osPath
-sysPath.append(osPath.abspath("./"))
+from pytest import raises
 from Config import Config
-import pytest
 
 
-def test_MustAssertIfConfigFileDoesntExist():
+def test_MustAssertIfConfigFileDoesNotExist():
 
-    with pytest.raises(FileNotFoundError, match=r".* fakefile.yml"):
+    with raises(FileNotFoundError, match=r".* fakefile.yml"):
         Config("fakefile.yml")
+
+
+def test_MustAssertIfConfigFileIsNotValid():
+
+    with raises(Exception, match=r"Invalid configuration file: .*"):
+        Config("Tests/Config_test_invalid.yml")
 
 
 def test_LoadedConfigMustContainTwoDevices():

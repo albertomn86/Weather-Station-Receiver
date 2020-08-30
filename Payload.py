@@ -1,8 +1,8 @@
 class Payload(object):
 
     def __init__(self):
-        self.samplingInterval = None
-        self.errorCode = None
+        self.interval = None
+        self.status = None
         self.battery = None
         self.temperature = None
         self.humidity = None

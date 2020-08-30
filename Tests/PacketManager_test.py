@@ -9,6 +9,7 @@ import pytest
 
 config = Config("Tests/Config_test.yml")
 
+
 def test_ValifPacketFromNotRegisteredDeviceMustBeRejected():
 
     validFrame = "S80D34FD0"

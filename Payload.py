@@ -9,3 +9,16 @@ class Payload(object):
         self.pressure = None
         self.luminosity = None
         self.uvRadiation = None
+
+    def GetValues(self):
+        values = {}
+        values['interval'] = self.interval
+        values['status'] = self.status
+        values['battery'] = self.battery
+        values['temperature'] = self.temperature
+        values['humidity'] = self.humidity
+        values['pressure'] = self.pressure
+        values['luminosity'] = self.luminosity
+        values['uvRadiation'] = self.uvRadiation
+
+        return values

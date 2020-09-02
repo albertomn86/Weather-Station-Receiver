@@ -17,7 +17,7 @@ def test_ValifPacketFromNotRegisteredDeviceMustBeRejected():
         packetManager.Decode(packet)
 
 
-def test_DecodeMustReturnJSONStringWhithValidPacket():
+def test_DecodeMustReturnJSONStringWithValidPacket():
 
     validFrame = "S80D4P101812;T-304;H8000;S12;I300;L3000;B419;U067"
     packet = Packet(validFrame)

@@ -3,8 +3,8 @@ from Payload import Payload
 
 class PayloadDecoder(object):
 
-    def DecodeFromPacket(packet):
-        sampleList = packet.Payload.split(';')
+    def Decode(raw):
+        sampleList = raw.split(';')
         payload = Payload()
 
         for sample in sampleList:

@@ -17,13 +17,14 @@ class PacketManager(object):
         if packet.From not in self._config.GetDevices():
             raise ValueError(f"Packet from unregistered device: {packet.From}")
 
-        payload = PayloadDecoder.DecodeFromPacket(packet)
-        payloadData = payload.GetValues()
-        payloadData['deviceId'] = packet.From
+        rawPayload = packet.Payload
+        payload = PayloadDecoder.Decode(rawPayload)
+        payloadValues = payload.GetValues()
+        payloadValues['deviceId'] = packet.From
 
         data = {}
         data['ts'] = ts
-        data['values'] = payloadData
+        data['values'] = payloadValues
 
         json_data = dumps(data, sort_keys=True)
         return json_data

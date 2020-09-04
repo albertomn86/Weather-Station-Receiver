@@ -1,4 +1,3 @@
-from Config import Config
 from PayloadDecoder import PayloadDecoder
 from json import dumps
 from time import time
@@ -10,11 +9,11 @@ def current_milli_time():
 
 class PacketManager(object):
 
-    def __init__(self, config=Config("Config.yml")):
+    def __init__(self, config):
         self._config = config
 
     def Decode(self, packet, ts=current_milli_time()):
-        if packet.From not in self._config.GetDevices():
+        if packet.From not in self._config.GetValidDevicesIdList():
             raise ValueError(f"Packet from unregistered device: {packet.From}")
 
         rawPayload = packet.Payload

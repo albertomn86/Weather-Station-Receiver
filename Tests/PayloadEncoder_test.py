@@ -1,4 +1,3 @@
-from pytest import raises
 from PayloadEncoder import PayloadEncoder
 from Payload import Payload
 

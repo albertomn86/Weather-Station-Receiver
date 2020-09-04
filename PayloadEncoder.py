@@ -1,8 +1,3 @@
-def EncodeDecimal(value):
-    encoded = "{0:.2f}".format(value)
-    encoded = encoded.replace(".", "")
-    return encoded
-
 class PayloadEncoder(object):
 
     def Encode(payload):
@@ -33,3 +28,9 @@ class PayloadEncoder(object):
             generated += f"U{EncodeDecimal(payload.uvRadiation)};"
 
         return generated[:-1]
+
+
+def EncodeDecimal(value):
+    encoded = "{0:.2f}".format(value)
+    encoded = encoded.replace(".", "")
+    return encoded

@@ -1,3 +1,6 @@
-devices:
-  - A3F6
-  - 80D4
+Devices:
+  - ID: A3F6
+    Subscription: T,H,P,U,L
+    Interval: 300
+  - ID: 80D4
+    Interval: 600

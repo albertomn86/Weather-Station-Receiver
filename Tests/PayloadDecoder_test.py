@@ -1,6 +1,5 @@
 from pytest import raises
 from PayloadDecoder import PayloadDecoder
-from Packet import Packet
 
 
 def test_PayloadMustFailIContainsAnInvalidElement():

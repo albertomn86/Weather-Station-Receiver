@@ -14,11 +14,17 @@ def test_MustAssertIfConfigFileIsNotValid():
         Config("Tests/Config_test_invalid.yml")
 
 
+def test_MustAssertWhenThereAreNoDevicesDefined():
+
+    with raises(Exception, match=r"No devices found"):
+        Config("Tests/Config_test_empty.yml")
+
+
 def test_LoadedConfigMustContainTwoDevices():
 
     config = Config("Tests/Config_test.yml")
 
-    devices = config.GetDevices()
+    devices = config.GetValidDevicesIdList()
 
     assert len(devices) == 2
     assert "A3F6" in devices

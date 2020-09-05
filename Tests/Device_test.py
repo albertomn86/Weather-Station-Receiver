@@ -34,18 +34,50 @@ def test_GivenARawDeviceDictWithoutSubscriptionMustReturnDefault():
     raw = {"ID": "a3f6", "Interval": 300}
     device = Device(raw)
 
-    assert ['I'] == device.subscription
+    assert ['I'] == device.subscriptionValues
+    assert "0000" == device.subscriptionDevice
 
 
 def test_GivenARawDeviceDictMustReturnOrderedSubscriptionList():
-    raw = {"ID": "a3f6", "Subscription": "T,h,P,U,l,B", "Interval": 300}
+    raw = {
+            "ID": "a3f6",
+            "Subscription":
+            {
+                "Values": "T,h,P,U,l ,B",
+                "Device": "A3F6"
+            },
+            "Interval": 300
+        }
     device = Device(raw)
 
-    assert ['B', 'H', 'I', 'L', 'P', 'T', 'U'] == device.subscription
+    assert ['B', 'H', 'I', 'L', 'P', 'T', 'U'] == device.subscriptionValues
+    assert "A3F6" == device.subscriptionDevice
 
 
 def test_GivenARawDeviceWithAnInvalidValueMustRaiseException():
-    raw = {"ID": "a3f6", "Subscription": "T,h,P,c,l,b"}
+    raw = {
+            "ID": "a3f6",
+            "Subscription":
+            {
+                "Values": "T,h,P,U,l,B,C",
+                "Device": "A3F6"
+            },
+            "Interval": 300
+        }
 
     with raises(ValueError, match=r"Invalid subscription value: 'C'"):
+        Device(raw)
+
+
+def test_GivenARawDeviceWithoutSubscriptionDeviceMustRaiseException():
+    raw = {
+        "ID": "a3f6",
+        "Subscription":
+        {
+            "Values": "T,h,P,U,l,B"
+        },
+        "Interval": 300
+    }
+
+    with raises(ValueError, match=r"Subscription device not found"):
         Device(raw)

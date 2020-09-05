@@ -3,7 +3,7 @@ class Device(object):
     def __init__(self, raw):
         self.id = Device._ValidateId(raw.get("ID"))
         self.interval = Device._ValidateInterval(raw.get("Interval"))
-        self.subscription = \
+        self.subscriptionDevice, self.subscriptionValues = \
             Device._ValidateSubscription(raw.get("Subscription"))
 
     def _ValidateId(rawId):
@@ -20,14 +20,19 @@ class Device(object):
 
     def _ValidateSubscription(rawSubscription):
         subscription = ['I']
+        device = "0000"
         if rawSubscription is not None:
-            values = rawSubscription.split(',')
+            values = rawSubscription.get("Values").split(',')
             for item in values:
-                item = item.upper()
+                item = item.upper().strip()
                 if item in ['T', 'H', 'P', 'U', 'L', 'S', 'B']:
                     subscription.append(item)
                 else:
                     raise ValueError(f"Invalid subscription value: '{item}'")
             subscription.sort()
 
-        return subscription
+            device = rawSubscription.get("Device")
+            if device is None:
+                raise ValueError("Subscription device not found")
+
+        return device, subscription

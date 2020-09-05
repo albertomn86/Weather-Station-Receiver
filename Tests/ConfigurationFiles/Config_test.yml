@@ -1,6 +1,8 @@
 Devices:
   - ID: A3F6
-    Subscription: T,H,P,U,L
+    Subscription:
+      Device: 80D4
+      Values: T,H,P,U,L
     Interval: 300
   - ID: 80D4
     Interval: 600

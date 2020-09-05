@@ -1,4 +1,3 @@
-from PayloadDecoder import PayloadDecoder
 from json import dumps
 from time import time
 
@@ -12,14 +11,13 @@ class PacketManager(object):
     def __init__(self, config):
         self._config = config
 
-    def Decode(self, packet, ts=current_milli_time()):
-        if packet.From not in self._config.GetValidDevicesIdList():
-            raise ValueError(f"Packet from unregistered device: {packet.From}")
+    def DecodePacket(self, packet, ts=current_milli_time()):
+        if packet.deviceId not in self._config.GetValidDevicesIdList():
+            raise ValueError(f"Packet from unregistered device: \
+                {packet.deviceId}")
 
-        rawPayload = packet.Payload
-        payload = PayloadDecoder.Decode(rawPayload)
-        payloadValues = payload.GetValues()
-        payloadValues['deviceId'] = packet.From
+        payloadValues = packet.payload.GetValues()
+        payloadValues['deviceId'] = packet.deviceId
 
         data = {}
         data['ts'] = ts

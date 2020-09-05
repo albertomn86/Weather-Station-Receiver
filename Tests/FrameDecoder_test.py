@@ -42,10 +42,13 @@ def test_FramesWithInvalidFirstCharacterMustReturnException():
 
 def test_ValidFrameMustReturnAValidPacket():
 
-    frame = "S80D44FD0#"
+    frame = "S80D4P101812;T-304;H8000#"
 
-    packet = FrameDecoder(frame).GetPacket()
+    decodedFrame = FrameDecoder(frame)
+    packet = decodedFrame.GetPacket()
 
-    assert packet.Type == "S"
-    assert packet.From == "80D4"
-    assert packet.Payload == "4FD0"
+    assert packet.type == "S"
+    assert packet.deviceId == "80D4"
+    assert packet.payload.temperature == -3.04
+    assert packet.payload.humidity == 80.0
+    assert packet.payload.pressure == 1018.12

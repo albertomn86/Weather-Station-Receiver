@@ -4,7 +4,7 @@ from Config import Config
 from PacketManager import PacketManager
 
 
-config = Config("Tests/Config_test.yml")
+config = Config("Tests/ConfigurationFiles/Config_test.yml")
 
 
 def test_ValifPacketFromNotRegisteredDeviceMustBeRejected():

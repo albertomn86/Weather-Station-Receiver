@@ -2,6 +2,9 @@ from pytest import raises
 from Config import Config
 
 
+_configFilesFolder = "Tests/ConfigurationFiles/"
+
+
 def test_MustAssertIfConfigFileDoesNotExist():
 
     with raises(FileNotFoundError, match=r".* fakefile.yml"):
@@ -11,18 +14,18 @@ def test_MustAssertIfConfigFileDoesNotExist():
 def test_MustAssertIfConfigFileIsNotValid():
 
     with raises(Exception, match=r"Invalid configuration file: .*"):
-        Config("Tests/Config_test_invalid.yml")
+        Config(_configFilesFolder + "Config_test_invalid.yml")
 
 
 def test_MustAssertWhenThereAreNoDevicesDefined():
 
     with raises(Exception, match=r"No devices found"):
-        Config("Tests/Config_test_empty.yml")
+        Config(_configFilesFolder + "Config_test_empty.yml")
 
 
 def test_LoadedConfigMustContainTwoDevices():
 
-    config = Config("Tests/Config_test.yml")
+    config = Config(_configFilesFolder + "Config_test.yml")
 
     devices = config.GetValidDevicesIdList()
 

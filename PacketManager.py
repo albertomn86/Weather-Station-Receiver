@@ -11,7 +11,7 @@ class PacketManager(object):
     def __init__(self, config):
         self._config = config
 
-    def DecodePacket(self, packet, ts=current_milli_time()):
+    def ProcessPacket(self, packet, ts=current_milli_time()):
         if packet.deviceId not in self._config.GetValidDevicesIdList():
             raise ValueError(f"Packet from unregistered device: \
                 {packet.deviceId}")
@@ -25,3 +25,7 @@ class PacketManager(object):
 
         json_data = dumps(data, sort_keys=True)
         return json_data
+
+    def _SaveDataForSubscription(packet):
+        with open(f"{packet.deviceId}.tmp", "b") as tmpFile:
+            tmpFile.write(packet.payload)

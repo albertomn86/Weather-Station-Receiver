@@ -32,3 +32,21 @@ def test_LoadedConfigMustContainTwoDevices():
     assert len(devices) == 2
     assert "A3F6" in devices
     assert "80D4" in devices
+
+
+def test_GivenAnIdMustReturnADeviceObject():
+
+    config = Config(_configFilesFolder + "Config_test.yml")
+
+    device = config.GetDeviceById("A3F6")
+
+    assert device.id == "A3F6"
+
+
+def test_DevicesWithSubscriptionMustReturnOneValue():
+
+    config = Config(_configFilesFolder + "Config_test.yml")
+
+    deviceList = config.GetDevicesWithSubscriptionIdList()
+
+    assert ["80D4"] == deviceList

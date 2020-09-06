@@ -35,7 +35,6 @@ def test_GivenARawDeviceDictWithoutSubscriptionMustReturnDefault():
     device = Device(raw)
 
     assert ['I'] == device.subscriptionValues
-    assert "0000" == device.subscriptionDevice
 
 
 def test_GivenARawDeviceDictMustReturnOrderedSubscriptionList():

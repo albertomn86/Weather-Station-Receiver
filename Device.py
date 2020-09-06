@@ -20,7 +20,7 @@ class Device(object):
 
     def _ValidateSubscription(rawSubscription):
         subscription = ['I']
-        device = "0000"
+        device = None
         if rawSubscription is not None:
             values = rawSubscription.get("Values").split(',')
             for item in values:

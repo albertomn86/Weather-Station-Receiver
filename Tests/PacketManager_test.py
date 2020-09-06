@@ -14,7 +14,7 @@ def test_ValifPacketFromNotRegisteredDeviceMustBeRejected():
     packetManager = PacketManager(config)
 
     with raises(ValueError, match=r"Packet from unregistered device"):
-        packetManager.DecodePacket(packet)
+        packetManager.ProcessPacket(packet)
 
 
 def test_DecodeMustReturnJSONStringWithValidPacket():
@@ -24,7 +24,7 @@ def test_DecodeMustReturnJSONStringWithValidPacket():
     packetManager = PacketManager(config)
 
     ts = 1598892487509
-    decoded = packetManager.DecodePacket(packet, ts)
+    decoded = packetManager.ProcessPacket(packet, ts)
 
     expected = r'{"ts": 1598892487509, "values": {"battery": 4.19, ' \
         + r'"deviceId": "80D4", "humidity": 80.0, "interval": 300, ' \

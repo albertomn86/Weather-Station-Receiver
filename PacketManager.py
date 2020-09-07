@@ -1,5 +1,6 @@
 from json import dumps
 from time import time
+import pickle
 
 
 def current_milli_time():
@@ -16,6 +17,9 @@ class PacketManager(object):
             raise ValueError(f"Packet from unregistered device: \
                 {packet.deviceId}")
 
+        if packet.deviceId in self._config.GetDevicesWithSubscriptionIdList():
+            PacketManager._SaveDataForSubscription(packet)
+
         payloadValues = packet.payload.GetValues()
         payloadValues['deviceId'] = packet.deviceId
 
@@ -27,5 +31,5 @@ class PacketManager(object):
         return json_data
 
     def _SaveDataForSubscription(packet):
-        with open(f"{packet.deviceId}.tmp", "b") as tmpFile:
-            tmpFile.write(packet.payload)
+        with open(f"{packet.deviceId}.tmp", "wb") as tmpFile:
+            pickle.dump(packet.payload, tmpFile, pickle.HIGHEST_PROTOCOL)

@@ -33,3 +33,8 @@ class PacketManager(object):
     def _SaveDataForSubscription(packet):
         with open(f"{packet.deviceId}.tmp", "wb") as tmpFile:
             pickle.dump(packet.payload, tmpFile, pickle.HIGHEST_PROTOCOL)
+
+    def _GetSavedPayloadFromFile(deviceId):
+        with open(f"{deviceId}.tmp", "rb") as tmpFile:
+            payload = pickle.load(tmpFile)
+            return payload

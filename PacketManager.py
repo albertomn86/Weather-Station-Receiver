@@ -1,6 +1,6 @@
 from json import dumps
 from time import time
-import pickle
+from PacketSaver import PacketSaver
 
 
 def current_milli_time():
@@ -18,7 +18,7 @@ class PacketManager(object):
                 {packet.deviceId}")
 
         if packet.deviceId in self._config.GetDevicesWithSubscriptionIdList():
-            PacketManager._SaveDataForSubscription(packet)
+            PacketSaver.SaveDataForSubscription(packet)
 
         payloadValues = packet.payload.GetValues()
         payloadValues['deviceId'] = packet.deviceId
@@ -29,12 +29,3 @@ class PacketManager(object):
 
         json_data = dumps(data, sort_keys=True)
         return json_data
-
-    def _SaveDataForSubscription(packet):
-        with open(f"{packet.deviceId}.tmp", "wb") as tmpFile:
-            pickle.dump(packet.payload, tmpFile, pickle.HIGHEST_PROTOCOL)
-
-    def _GetSavedPayloadFromFile(deviceId):
-        with open(f"{deviceId}.tmp", "rb") as tmpFile:
-            payload = pickle.load(tmpFile)
-            return payload

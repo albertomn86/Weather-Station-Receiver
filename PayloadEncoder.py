@@ -1,4 +1,4 @@
-class PayloadEncoder(object):
+class PayloadEncoder():
 
     def Encode(payload):
         generated = ""

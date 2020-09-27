@@ -15,3 +15,10 @@ def test_GivenAnIdReturnStoredPayload():
     remove("A3F6.tmp")
 
     assert 4.19 == readPayload.battery
+
+
+def test_WhenTheFileDoesNotExistMustReturnEmptyPayload():
+
+    readPayload = PacketSaver.GetSavedPayloadFromFile("A3F6")
+
+    assert readPayload.battery is None

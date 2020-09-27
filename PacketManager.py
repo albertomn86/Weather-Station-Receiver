@@ -1,6 +1,7 @@
 from json import dumps
 from time import time
 from PacketSaver import PacketSaver
+from PayloadEncoder import PayloadEncoder
 
 
 def current_milli_time():
@@ -29,3 +30,19 @@ class PacketManager(object):
 
         json_data = dumps(data, sort_keys=True)
         return json_data
+
+    def GetResponseFrame(self, deviceId):
+        if deviceId not in self._config.GetValidDevicesIdList():
+            raise ValueError(f"Invalid device ID: {deviceId}")
+
+        deviceConfig = self._config.GetDeviceById(deviceId)
+        subscribedDevice = deviceConfig.subscriptionDevice
+        subscribedDeviceValues = deviceConfig.subscriptionValues
+
+        newPayload = PacketSaver.GetSavedPayloadFromFile(subscribedDevice)
+        newPayload.KeepValues(subscribedDeviceValues)
+        newPayload.interval = deviceConfig.interval
+
+        encodedPayload = PayloadEncoder.Encode(newPayload)
+
+        return f"K{deviceId}{encodedPayload}"

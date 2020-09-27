@@ -1,7 +1,7 @@
 from Payload import Payload
 
 
-class PayloadDecoder(object):
+class PayloadDecoder():
 
     def Decode(raw):
         sampleList = raw.split(';')

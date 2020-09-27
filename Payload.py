@@ -22,3 +22,21 @@ class Payload(object):
         values['uvRadiation'] = self.uvRadiation
 
         return values
+
+    def KeepValues(self, values):
+        if 'I' not in values:
+            self.interval = None
+        if 'S' not in values:
+            self.status = None
+        if 'B' not in values:
+            self.battery = None
+        if 'T' not in values:
+            self.temperature = None
+        if 'H' not in values:
+            self.humidity = None
+        if 'P' not in values:
+            self.pressure = None
+        if 'L' not in values:
+            self.luminosity = None
+        if 'U' not in values:
+            self.uvRadiation = None

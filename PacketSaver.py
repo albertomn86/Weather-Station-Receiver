@@ -1,4 +1,6 @@
 import pickle
+from os import path
+from Payload import Payload
 
 
 class PacketSaver():
@@ -10,6 +12,10 @@ class PacketSaver():
 
     @staticmethod
     def GetSavedPayloadFromFile(deviceId):
-        with open(f"{deviceId}.tmp", "rb") as tmpFile:
-            payload = pickle.load(tmpFile)
-            return payload
+        tmpFileName = f"{deviceId}.tmp"
+        if path.exists(tmpFileName):
+            with open(tmpFileName, "rb") as tmpFile:
+                payload = pickle.load(tmpFile)
+                return payload
+        else:
+            return Payload()

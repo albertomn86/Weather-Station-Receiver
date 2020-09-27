@@ -62,3 +62,50 @@ def test_WhenADeviceHasNotSubscribedDevicesTheMustNotBeStored():
     found = path.exists(tmpFile)
 
     assert not found
+
+
+def test_WhenGeneratinAResponseGivenAnInvalidIdMustAssert():
+
+    packetManager = PacketManager(config)
+
+    with raises(ValueError, match=r"Invalid device ID: .*"):
+        packetManager.GetResponseFrame("A3F0")
+
+
+def test_GivenAnIdWithSubscriptionMustGenerateAResponseFrame():
+
+    packetManager = PacketManager(config)
+
+    validFrame = "S80D4P102012;T3087;H6000;S12;I300;L2800;B419;U077"
+    packet = Packet(validFrame)
+    packetManager.ProcessPacket(packet)
+
+    sample = packetManager.GetResponseFrame("A3F6")
+
+    expectedSample = "KA3F6H6000;I300;L2800;P102012;T3087;U077"
+
+    remove("80D4.tmp")
+
+    assert expectedSample == sample
+
+
+def test_GivenAnIdWithoutSubscriptionDataMustGenerateAResponseFrame():
+
+    packetManager = PacketManager(config)
+
+    sample = packetManager.GetResponseFrame("A3F6")
+
+    expectedSample = "KA3F6I300"
+
+    assert expectedSample == sample
+
+
+def test_GivenAnIdWithoutNoSubscriptionGenerateAResponseFrame():
+
+    packetManager = PacketManager(config)
+
+    sample = packetManager.GetResponseFrame("80D4")
+
+    expectedSample = "K80D4I600"
+
+    assert expectedSample == sample

@@ -2,7 +2,7 @@ from pytest import raises
 from Config import Config
 
 
-_configFilesFolder = "Tests/ConfigurationFiles/"
+_configFilesFolder = "tests/ConfigurationFiles/"
 
 
 def test_MustAssertIfConfigFileDoesNotExist():

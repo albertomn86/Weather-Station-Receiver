@@ -1,6 +1,6 @@
 from yaml import safe_load, YAMLError
 from os import path
-from Device import Device
+from src.Device import Device
 
 
 class Config(object):
@@ -19,9 +19,19 @@ class Config(object):
         if self._config is None:
             raise Exception(f"Empty configuration file: {file}")
 
+        self._serialPort = Config._ParseReceiver(self._config)
+
         self._devicesList, self._allowedDevicesIdList, \
             self._devicesWithSubsciption = \
             Config._ParseDevices(self._config)
+
+    def _ParseReceiver(config):
+        receiver = config.get("Receiver")
+        if receiver is not None:
+            serialPort = receiver.get("SerialPort")
+            if serialPort is not None:
+                return serialPort
+        raise Exception("Serial port not specified")
 
     def _ParseDevices(config):
         devices = config.get("Devices")
@@ -48,3 +58,6 @@ class Config(object):
 
     def GetDevicesWithSubscriptionIdList(self):
         return self._devicesWithSubsciption
+
+    def GetReceiverSerialPort(self):
+        return self._serialPort

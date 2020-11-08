@@ -23,6 +23,21 @@ def test_MustAssertWhenThereAreNoDevicesDefined():
         Config(_configFilesFolder + "Config_test_empty.yml")
 
 
+def test_MustAssertWhenSerialPortIsNotSpecified():
+
+    with raises(Exception, match=r"Serial port not specified"):
+        Config(_configFilesFolder + "Config_test_serial.yml")
+
+
+def test_MustReturnSerialPort():
+
+    config = Config(_configFilesFolder + "Config_test.yml")
+
+    serialPort = config.GetReceiverSerialPort()
+
+    assert "/dev/ttyS0" == serialPort
+
+
 def test_LoadedConfigMustContainTwoDevices():
 
     config = Config(_configFilesFolder + "Config_test.yml")

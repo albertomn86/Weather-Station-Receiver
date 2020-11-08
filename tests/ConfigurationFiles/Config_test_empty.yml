@@ -1,1 +1,3 @@
+Receiver:
+  SerialPort: /dev/ttyS0
 Devices:

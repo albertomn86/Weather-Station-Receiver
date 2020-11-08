@@ -1,3 +1,7 @@
+Receiver:
+  SerialPort: /dev/ttyS0
+Upload:
+  Url: http://localhost:8080/
 Devices:
   - ID: A3F6
     Subscription:

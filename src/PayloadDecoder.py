@@ -1,4 +1,4 @@
-from Payload import Payload
+from src.Payload import Payload
 
 
 class PayloadDecoder():

@@ -1,4 +1,4 @@
-from Packet import Packet
+from src.Packet import Packet
 
 
 class FrameDecoder(object):

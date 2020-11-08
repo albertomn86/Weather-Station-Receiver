@@ -1,6 +1,6 @@
 import pickle
 from os import path
-from Payload import Payload
+from src.Payload import Payload
 
 
 class PacketSaver():

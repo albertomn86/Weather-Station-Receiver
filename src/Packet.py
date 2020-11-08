@@ -1,4 +1,4 @@
-from PayloadDecoder import PayloadDecoder
+from src.PayloadDecoder import PayloadDecoder
 
 
 class Packet(object):

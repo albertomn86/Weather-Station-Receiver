@@ -1,0 +1,12 @@
+# Receiver:
+#   SerialPort: /dev/ttyS0
+# Upload:
+#   Address: http://localhost:8080/
+# Devices:
+#   - ID: A3F6
+#     Subscription:
+#       Device: 80D4
+#       Values: T,H,P,U,L
+#     Interval: 300
+#   - ID: 80D4
+#     Interval: 600

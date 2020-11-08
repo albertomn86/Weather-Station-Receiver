@@ -8,11 +8,15 @@ import requests
 
 def UploadData(config, payload):
     url = config.GetUploadAddress()
-    headers = {'content-type': 'application/json', 'Accept-Charset': 'UTF-8'}
-    try:
-        requests.post(url, data=payload, headers=headers)
-    except Exception as exception:
-        raise exception
+    if url:
+        headers = {
+            'content-type': 'application/json',
+            'Accept-Charset': 'UTF-8'
+            }
+        try:
+            requests.post(url, data=payload, headers=headers)
+        except Exception as exception:
+            raise exception
 
 
 def Run(config, source, logger, uploader):
@@ -26,7 +30,7 @@ def Run(config, source, logger, uploader):
         jsonPacket = manager.ProcessPacket(packet)
         response = manager.GetResponseFrame(packet.deviceId)
     except ValueError as error:
-        logger.Write(logger.WARN, error.args[0])
+        logger.Write(logger.WARN, str(error))
         return
 
     source.SendFrame(response)
@@ -37,19 +41,18 @@ def Run(config, source, logger, uploader):
         try:
             uploader(config, jsonPacket)
         except Exception as exception:
-            logger.Write(logger.ERR, exception.args[0])
+            logger.Write(logger.ERR, str(exception))
 
 
 def main():
     logger = Logger(True)
     try:
         config = Config('Config.yml')
+        serialPort = config.GetReceiverSerialPort()
+        socket = Socket(serialPort)
     except Exception as exception:
-        logger.Write(logger.ERR, exception.args[0])
+        logger.Write(logger.ERR, str(exception))
         exit(1)
-
-    serialPort = config.GetReceiverSerialPort()
-    socket = Socket(serialPort)
 
     while True:
         Run(config, socket, logger, UploadData)

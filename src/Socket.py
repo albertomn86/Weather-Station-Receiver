@@ -14,7 +14,7 @@ class Socket(object):
         )
 
     def ReadFrame(self):
-        return self.socket.readline()
+        return self.socket.readline().decode()
 
     def SendFrame(self, frame):
         self.socket.write(frame.encode())

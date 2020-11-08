@@ -30,6 +30,7 @@ sudo raspi-config
 
     _Would you like a login shell to be accessible over serial?_
     **No**
+
     _Would you like the serial port hardware to be enabled?_
     **Yes**
 

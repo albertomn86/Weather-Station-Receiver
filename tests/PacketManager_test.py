@@ -82,7 +82,7 @@ def test_GivenAnIdWithSubscriptionMustGenerateAResponseFrame():
 
     sample = packetManager.GetResponseFrame("A3F6")
 
-    expectedSample = "KA3F6H6000;I300;L2800;P102012;T3087;U077"
+    expectedSample = "KA3F6H6000;I300;L2800;P102012;T3087;U077#"
 
     remove("80D4.tmp")
 
@@ -95,7 +95,7 @@ def test_GivenAnIdWithoutSubscriptionDataMustGenerateAResponseFrame():
 
     sample = packetManager.GetResponseFrame("A3F6")
 
-    expectedSample = "KA3F6I300"
+    expectedSample = "KA3F6I300#"
 
     assert expectedSample == sample
 
@@ -106,6 +106,6 @@ def test_GivenAnIdWithoutNoSubscriptionGenerateAResponseFrame():
 
     sample = packetManager.GetResponseFrame("80D4")
 
-    expectedSample = "K80D4I600"
+    expectedSample = "K80D4I600#"
 
     assert expectedSample == sample

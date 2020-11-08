@@ -15,8 +15,9 @@ class PacketManager(object):
 
     def ProcessPacket(self, packet, ts=current_milli_time()):
         if packet.deviceId not in self._config.GetValidDevicesIdList():
-            raise ValueError(f"Packet from unregistered device: \
-                {packet.deviceId}")
+            raise ValueError(
+                f"Packet from unregistered device: {packet.deviceId}"
+            )
 
         if packet.deviceId in self._config.GetDevicesWithSubscriptionIdList():
             PacketSaver.SaveDataForSubscription(packet)
@@ -45,4 +46,4 @@ class PacketManager(object):
 
         encodedPayload = PayloadEncoder.Encode(newPayload)
 
-        return f"K{deviceId}{encodedPayload}"
+        return f"K{deviceId}{encodedPayload}#"

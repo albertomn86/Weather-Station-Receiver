@@ -21,6 +21,9 @@ def UploadData(config, payload):
 
 def Run(config, source, logger, uploader):
     rawFrame = source.ReadFrame()
+    if not rawFrame:
+        return
+
     try:
         frame = FrameDecoder(rawFrame)
         packet = frame.GetPacket()
@@ -54,6 +57,7 @@ def main():
         logger.Write(logger.ERR, str(exception))
         exit(1)
 
+    logger.Write(logger.INFO, "Started")
     while True:
         Run(config, socket, logger, UploadData)
 

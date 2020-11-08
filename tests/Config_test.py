@@ -38,6 +38,15 @@ def test_MustReturnSerialPort():
     assert "/dev/ttyS0" == serialPort
 
 
+def test_MustReturnUploadAddress():
+
+    config = Config(_configFilesFolder + "Config_test.yml")
+
+    address = config.GetUploadAddress()
+
+    assert "http://localhost:8080/" == address
+
+
 def test_LoadedConfigMustContainTwoDevices():
 
     config = Config(_configFilesFolder + "Config_test.yml")

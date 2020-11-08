@@ -7,15 +7,15 @@ import requests
 
 
 def UploadData(config, payload):
-    url = 'http://localhost:8080/api/v1/B3ueZqE4r9sTh6T9YceJ/telemetry'
+    url = config.GetUploadAddress()
     headers = {'content-type': 'application/json', 'Accept-Charset': 'UTF-8'}
     try:
         requests.post(url, data=payload, headers=headers)
-    except Exception as e:
-        print(e)
+    except Exception as exception:
+        raise exception
 
 
-def Run(config, source, logger):
+def Run(config, source, logger, uploader):
     rawFrame = source.ReadFrame()
     try:
         frame = FrameDecoder(rawFrame)
@@ -32,7 +32,12 @@ def Run(config, source, logger):
     source.SendFrame(response)
     logger.Write(
         logger.INFO, f"Response frame sent to {packet.deviceId}: {response}")
-    UploadData(config, jsonPacket)
+
+    if uploader:
+        try:
+            uploader(config, jsonPacket)
+        except Exception as exception:
+            logger.Write(logger.ERR, exception.args[0])
 
 
 def main():
@@ -47,7 +52,7 @@ def main():
     socket = Socket(serialPort)
 
     while True:
-        Run(config, socket, logger)
+        Run(config, socket, logger, UploadData)
 
 
 if __name__ == "__main__":

@@ -15,7 +15,7 @@ def test_ReceiverMustShowErrorIfFrameIsInvalid():
     stub.SendFrame(testFrame)
     expectedMsg = f"Invalid frame: {testFrame}"
 
-    Run(config, stub, logger)
+    Run(config, stub, logger, None)
 
     assert expectedMsg == logger.lastMessage
 
@@ -28,7 +28,7 @@ def test_ReceiverMustShowErrorIfPayloadIsInvalid():
     stub.SendFrame(testFrame)
     expectedMsg = "Payload not valid: 4FD0"
 
-    Run(config, stub, logger)
+    Run(config, stub, logger, None)
 
     assert expectedMsg == logger.lastMessage
 
@@ -41,7 +41,7 @@ def test_ReceiverMustShowErrorIfPacketComesFromUnregisteredDevice():
     stub.SendFrame(testFrame)
     expectedMsg = "Packet from unregistered device: 80D3"
 
-    Run(config, stub, logger)
+    Run(config, stub, logger, None)
 
     assert expectedMsg == logger.lastMessage
 
@@ -53,8 +53,8 @@ def test_ReceiverMustSendFrameWhenAValidMessageIsReceived():
     stub.SendFrame("S80D4P101812;T-304;H8000;S12;I300;L3000;B419;U067#")
     stub.SendFrame("SA3F6I300#")
 
-    Run(config, stub, logger)
-    Run(config, stub, logger)
+    Run(config, stub, logger, None)
+    Run(config, stub, logger, None)
 
     expectedFrame1 = "K80D4I600#"
     expectedFrame2 = "KA3F6H8000;I300;L3000;P101812;T-304;U067#"

@@ -20,7 +20,7 @@ class Config(object):
             raise Exception(f"Empty configuration file: {file}")
 
         self._serialPort = Config._ParseReceiver(self._config)
-
+        self._uploadAddres = Config._ParseUpload(self._config)
         self._devicesList, self._allowedDevicesIdList, \
             self._devicesWithSubsciption = \
             Config._ParseDevices(self._config)
@@ -32,6 +32,13 @@ class Config(object):
             if serialPort is not None:
                 return serialPort
         raise Exception("Serial port not specified")
+
+    def _ParseUpload(config):
+        address = None
+        upload = config.get("Upload")
+        if upload is not None:
+            address = upload.get("Address")
+        return address
 
     def _ParseDevices(config):
         devices = config.get("Devices")
@@ -61,3 +68,6 @@ class Config(object):
 
     def GetReceiverSerialPort(self):
         return self._serialPort
+
+    def GetUploadAddress(self):
+        return self._uploadAddres

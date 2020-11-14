@@ -1,5 +1,7 @@
-# Weather-Station-Receiver
-Weather Station data receiver for RaspberryPi
+# Weather Station Receiver
+![Python application](https://github.com/albertomn86/Weather-Station-Receiver/workflows/Python%20application/badge.svg?branch=master)
+
+Weather Station data receiver for RaspberryPi. This application processes the data received from the [weather station](https://github.com/albertomn86/Weather-Station).
 
 ## Install
 Install PIP:

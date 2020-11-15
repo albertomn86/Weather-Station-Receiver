@@ -74,3 +74,6 @@ class Config(object):
 
     def GetUploadAddress(self):
         return self._uploadAddres
+
+    def GetUploadApiKey(self):
+        return self._uploadApiKey

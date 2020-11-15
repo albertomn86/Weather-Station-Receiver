@@ -20,7 +20,11 @@ def UploadData(config, payload):
 
 
 def Run(config, source, logger, uploader):
-    rawFrame = source.ReadFrame()
+    try:
+        rawFrame = source.ReadFrame()
+    except Exception as exception:
+        logger.Write(logger.WARN, str(exception))
+
     if not rawFrame:
         return
 
@@ -28,7 +32,7 @@ def Run(config, source, logger, uploader):
         frame = FrameDecoder(rawFrame)
         packet = frame.GetPacket()
         logger.Write(
-            logger.INFO, f"Received frame from {packet.deviceId}: {frame}")
+            logger.INFO, f"Received frame from {packet.deviceId}: {frame.content}")
         manager = PacketManager(config)
         jsonPacket = manager.ProcessPacket(packet)
         response = manager.GetResponseFrame(packet.deviceId)

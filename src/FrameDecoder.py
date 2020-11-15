@@ -5,7 +5,7 @@ class FrameDecoder(object):
 
     def __init__(self, frame):
         if self.IsValid(frame):
-            self._frame = frame
+            self.content = frame
         else:
             raise ValueError(f"Invalid frame: {frame}")
 
@@ -23,6 +23,6 @@ class FrameDecoder(object):
         return True
 
     def GetPacket(self):
-        packet = Packet(self._frame[:-1])
+        packet = Packet(self.content[:-1])
 
         return packet

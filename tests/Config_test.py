@@ -47,6 +47,15 @@ def test_MustReturnUploadAddress():
     assert "http://localhost:8080/" == address
 
 
+def test_MustReturnUploadApiKey():
+
+    config = Config(_configFilesFolder + "Config_test.yml")
+
+    apiKey = config.GetUploadApiKey()
+
+    assert "ABCD1234" == apiKey
+
+
 def test_LoadedConfigMustContainTwoDevices():
 
     config = Config(_configFilesFolder + "Config_test.yml")

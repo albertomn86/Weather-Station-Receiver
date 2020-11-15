@@ -3,6 +3,7 @@ from Packet import Packet
 from Config import Config
 from PacketManager import PacketManager
 from os import path, remove
+from json import dumps
 
 
 config = Config("tests/ConfigurationFiles/Config_test.yml")
@@ -18,7 +19,7 @@ def test_ValifPacketFromNotRegisteredDeviceMustBeRejected():
         packetManager.ProcessPacket(packet)
 
 
-def test_DecodeMustReturnJSONStringWithValidPacket():
+def test_DecodeMustReturnDictionaryWithValidPacket():
 
     validFrame = "S80D4P101812;T-304;H8000;S12;I300;L3000;B419;U067"
     packet = Packet(validFrame)
@@ -26,12 +27,13 @@ def test_DecodeMustReturnJSONStringWithValidPacket():
 
     ts = 1598892487509
     decoded = packetManager.ProcessPacket(packet, ts)
+    json_data = dumps(decoded, sort_keys=True)
 
     expected = r'{"ts": 1598892487509, "values": {"battery": 4.19, ' \
         + r'"deviceId": "80D4", "humidity": 80.0, "interval": 300, ' \
         + r'"luminosity": 3000, "pressure": 1018.12, "status": 12, ' \
         + r'"temperature": -3.04, "uvRadiation": 0.67}}'
-    assert expected == decoded
+    assert expected == json_data
 
 
 def test_WhenADeviceHasSubscribedDevicesTheLastPayloadMustBeStored():

@@ -1,4 +1,3 @@
-from json import dumps
 from time import time
 from src.PacketSaver import PacketSaver
 from src.PayloadEncoder import PayloadEncoder
@@ -29,8 +28,7 @@ class PacketManager(object):
         data['ts'] = ts
         data['values'] = payloadValues
 
-        json_data = dumps(data, sort_keys=True)
-        return json_data
+        return data
 
     def GetResponseFrame(self, deviceId):
         if deviceId not in self._config.GetValidDevicesIdList():

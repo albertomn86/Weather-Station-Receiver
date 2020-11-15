@@ -3,7 +3,7 @@ from src.Socket import Socket
 from src.Logger import Logger
 from src.PacketManager import PacketManager
 from src.FrameDecoder import FrameDecoder
-from src.DataUploader import ThingSpeak
+from src.DataUploader import ThingSpeakUploader
 
 
 def Run(config, source, logger, uploader):
@@ -51,7 +51,7 @@ def main():
 
     logger.Write(logger.INFO, "Started")
     while True:
-        Run(config, socket, logger, ThingSpeak)
+        Run(config, socket, logger, ThingSpeakUploader)
 
 
 if __name__ == "__main__":

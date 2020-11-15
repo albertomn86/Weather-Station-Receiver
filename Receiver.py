@@ -35,6 +35,7 @@ def Run(config, source, logger, uploader):
     if uploader:
         try:
             uploader(config, jsonPacket)
+            logger.Write(logger.INFO, "Data uploaded to ThingSpark")
         except Exception as exception:
             logger.Write(logger.ERR, str(exception))
 

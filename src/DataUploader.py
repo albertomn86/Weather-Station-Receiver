@@ -20,7 +20,8 @@ def ThingSpeakGenerateUrl(config, payload):
     return url
 
 
-def ThingSpeakUploader(url):
+def ThingSpeakUploader(config, payload):
+    url = ThingSpeakGenerateUrl(config, payload)
     try:
         requests.get(url)
     except Exception as exception:

@@ -3,20 +3,7 @@ from src.Socket import Socket
 from src.Logger import Logger
 from src.PacketManager import PacketManager
 from src.FrameDecoder import FrameDecoder
-import requests
-
-
-def UploadData(config, payload):
-    url = config.GetUploadAddress()
-    if url:
-        headers = {
-            'content-type': 'application/json',
-            'Accept-Charset': 'UTF-8'
-            }
-        try:
-            requests.post(url, data=payload, headers=headers)
-        except Exception as exception:
-            raise exception
+from src.DataUploader import ThingSpeak
 
 
 def Run(config, source, logger, uploader):
@@ -32,7 +19,8 @@ def Run(config, source, logger, uploader):
         frame = FrameDecoder(rawFrame)
         packet = frame.GetPacket()
         logger.Write(
-            logger.INFO, f"Received frame from {packet.deviceId}: {frame.content}")
+            logger.INFO,
+            f"Received frame from {packet.deviceId}: {frame.content}")
         manager = PacketManager(config)
         jsonPacket = manager.ProcessPacket(packet)
         response = manager.GetResponseFrame(packet.deviceId)
@@ -63,7 +51,7 @@ def main():
 
     logger.Write(logger.INFO, "Started")
     while True:
-        Run(config, socket, logger, UploadData)
+        Run(config, socket, logger, ThingSpeak)
 
 
 if __name__ == "__main__":

@@ -30,6 +30,20 @@ def test_GivenARawDeviceMustParseIntervalLowerThan60():
     assert device.interval == 60
 
 
+def test_GivenARawDeviceMustParseAltitudeGreatherThan0():
+    raw = {"ID": "A3F6", "Altitude": 848}
+    device = Device(raw)
+
+    assert device.altitude == 848
+
+
+def test_GivenARawDeviceMustParseAltitudeLowerThan0():
+    raw = {"ID": "A3F6", "Altitude": -1}
+    device = Device(raw)
+
+    assert device.altitude == 0
+
+
 def test_GivenARawDeviceDictWithoutSubscriptionMustReturnDefault():
     raw = {"ID": "a3f6", "Interval": 300}
     device = Device(raw)

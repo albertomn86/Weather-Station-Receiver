@@ -20,11 +20,13 @@ class Config(object):
             raise Exception(f"Empty configuration file: {file}")
 
         self._serialPort = Config._ParseReceiver(self._config)
-        self._uploadAddres, self._uploadApiKey = \
-            Config._ParseUpload(self._config)
-        self._devicesList, self._allowedDevicesIdList, \
-            self._devicesWithSubsciption = \
-            Config._ParseDevices(self._config)
+
+        self._uploadAddres, \
+            self._uploadApiKey = Config._ParseUpload(self._config)
+
+        self._devicesList, \
+            self._allowedDevicesIdList, \
+            self._devicesWithSubsciption = Config._ParseDevices(self._config)
 
     def _ParseReceiver(config):
         receiver = config.get("Receiver")

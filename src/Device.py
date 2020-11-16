@@ -5,6 +5,7 @@ class Device(object):
         self.interval = Device._ValidateInterval(raw.get("Interval"))
         self.subscriptionDevice, self.subscriptionValues = \
             Device._ValidateSubscription(raw.get("Subscription"))
+        self.altitude = Device._ValidateAltitude(raw.get("Altitude"))
 
     def _ValidateId(rawId):
         if rawId is None or len(rawId) != 4:
@@ -17,6 +18,11 @@ class Device(object):
             return 60
         else:
             return interval
+
+    def _ValidateAltitude(altitude):
+        if altitude is None or altitude < 0:
+            altitude = 0
+        return altitude
 
     def _ValidateSubscription(rawSubscription):
         subscription = ['I']

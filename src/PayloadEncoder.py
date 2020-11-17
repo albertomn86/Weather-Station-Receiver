@@ -13,7 +13,7 @@ class PayloadEncoder():
             generated += f"I{payload.interval};"
 
         if payload.luminosity is not None:
-            generated += f"L{payload.luminosity};"
+            generated += f"L{EncodeDecimal(payload.luminosity)};"
 
         if payload.pressure is not None:
             generated += f"P{EncodeDecimal(payload.pressure)};"

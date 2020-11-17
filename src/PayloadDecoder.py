@@ -58,6 +58,7 @@ class PayloadDecoder():
 
     def _ParseLuminosity(sample):
         value = int(sample[1:])
+        value /= 100.0
 
         if value < 0.0:
             raise ValueError(f"Invalid luminosity value: {value}")

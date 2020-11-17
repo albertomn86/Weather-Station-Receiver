@@ -62,11 +62,11 @@ def test_PayloadMustFailWithLuminosityLowerThan0():
 
 
 def test_PayloadMustDecodeValidLuminosity():
-    rawPayload = "L5000"
+    rawPayload = "L500000"
 
     payload = PayloadDecoder.Decode(rawPayload)
 
-    assert 5000 == payload.luminosity
+    assert 5000.0 == payload.luminosity
 
 
 def test_PayloadMustFailWithInvalidStatus():
@@ -145,7 +145,7 @@ def test_PayloadMustDecodeValidPressure():
 
 
 def test_PayloadMustDecodeValidPacketWithAllData():
-    rawPayload = "P101812;T-304;H8000;S12;I300;L3000;B419"
+    rawPayload = "P101812;T-304;H8000;S12;I300;L300000;B419"
 
     payload = PayloadDecoder.Decode(rawPayload)
 
@@ -156,4 +156,4 @@ def test_PayloadMustDecodeValidPacketWithAllData():
     assert 12 == payload.status
     assert payload.uvRadiation is None
     assert 4.19 == payload.battery
-    assert 3000 == payload.luminosity
+    assert 3000.0 == payload.luminosity

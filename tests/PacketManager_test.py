@@ -21,7 +21,7 @@ def test_ValifPacketFromNotRegisteredDeviceMustBeRejected():
 
 def test_DecodeMustReturnDictionaryWithValidPacket():
 
-    validFrame = "S80D4P101812;T-304;H8000;S12;I300;L3000;B419;U067"
+    validFrame = "S80D4P101812;T-304;H8000;S12;I300;L30000;B419;U067"
     packet = Packet(validFrame)
     packetManager = PacketManager(config)
 
@@ -31,7 +31,7 @@ def test_DecodeMustReturnDictionaryWithValidPacket():
 
     expected = r'{"ts": 1598892487509, "values": {"battery": 4.19, ' \
         + r'"deviceId": "80D4", "humidity": 80.0, "interval": 300, ' \
-        + r'"luminosity": 3000, "pressure": 1126.9, "status": 12, ' \
+        + r'"luminosity": 300.0, "pressure": 1132.19, "status": 12, ' \
         + r'"temperature": -3.04, "uvRadiation": 0.67}}'
     assert expected == json_data
 

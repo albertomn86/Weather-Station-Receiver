@@ -17,6 +17,6 @@ def test_ThingSpeakGenerateUrlMustReturnValidUrl():
 
     expectedUrl = "http://localhost:8080/?api_key=ABCD1234&field1=300" \
         + "&field2=12&field3=4.19&field4=30.87&field5=60.0" \
-        + "&field6=1077.21&field7=2800.0&field8=0.77"
+        + "&field6=1084.84&field7=2800.0&field8=0.77"
 
     assert expectedUrl == url

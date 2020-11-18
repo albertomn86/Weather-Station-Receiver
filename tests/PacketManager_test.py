@@ -31,7 +31,7 @@ def test_DecodeMustReturnDictionaryWithValidPacket():
 
     expected = r'{"ts": 1598892487509, "values": {"battery": 4.19, ' \
         + r'"deviceId": "80D4", "humidity": 80.0, "interval": 300, ' \
-        + r'"luminosity": 300.0, "pressure": 1132.19, "status": 12, ' \
+        + r'"luminosity": 300.0, "pressure": 1126.9, "status": 12, ' \
         + r'"temperature": -3.04, "uvRadiation": 0.67}}'
     assert expected == json_data
 

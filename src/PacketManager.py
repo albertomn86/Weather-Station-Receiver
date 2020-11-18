@@ -24,11 +24,10 @@ class PacketManager(object):
         payloadValues['deviceId'] = packet.deviceId
 
         currentPressure = payloadValues['pressure']
-        currentTemperature = payloadValues['temperature']
         if currentPressure is not None:
             device = self._config.GetDeviceById(packet.deviceId)
             seaLevelPressure = PacketManager.getSeaLevelPressure(
-                currentPressure, currentTemperature, device.altitude)
+                currentPressure, device.altitude)
             payloadValues['pressure'] = seaLevelPressure
 
         data = {}
@@ -54,9 +53,7 @@ class PacketManager(object):
         return f"K{deviceId}{encodedPayload}#"
 
     @staticmethod
-    def getSeaLevelPressure(pressure, temperature, altitude):
+    def getSeaLevelPressure(pressure, altitude):
         seaLevelPressure = \
-            pressure * (pow(1.0 - ((0.0065 * altitude) /
-                        (temperature + 0.0065 * altitude + 273.15)), -5.257))
-
+            pressure / pow(1.0 - (0.000022557 * altitude), 5.256)
         return round(seaLevelPressure, 2)

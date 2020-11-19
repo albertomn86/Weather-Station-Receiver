@@ -6,7 +6,7 @@ from Packet import Packet
 config = Config("tests/ConfigurationFiles/Config_test.yml")
 
 
-def test_ThingSpeakGenerateUrlMustReturnValidUrl():
+def test_thingspeak_generate_url_must_return_valid_url():
     packetManager = PacketManager(config)
 
     validFrame = "S80D4P98012;T3087;H6000;S12;I300;L280000;B419;U077"

@@ -5,31 +5,31 @@ from Config import Config
 _configFilesFolder = "tests/ConfigurationFiles/"
 
 
-def test_MustAssertIfConfigFileDoesNotExist():
+def test_must_assert_if_config_file_does_not_exist():
 
     with raises(FileNotFoundError, match=r".* fakefile.yml"):
         Config("fakefile.yml")
 
 
-def test_MustAssertIfConfigFileIsNotValid():
+def test_must_assert_if_config_file_is_not_valid():
 
     with raises(Exception, match=r"Invalid configuration file: .*"):
         Config(_configFilesFolder + "Config_test_invalid.yml")
 
 
-def test_MustAssertWhenThereAreNoDevicesDefined():
+def test_must_assert_when_there_are_no_devices_defined():
 
     with raises(Exception, match=r"No devices found"):
         Config(_configFilesFolder + "Config_test_empty.yml")
 
 
-def test_MustAssertWhenSerialPortIsNotSpecified():
+def test_must_assert_when_serial_port_is_not_specified():
 
     with raises(Exception, match=r"Serial port not specified"):
         Config(_configFilesFolder + "Config_test_serial.yml")
 
 
-def test_MustReturnSerialPort():
+def test_must_return_serial_port():
 
     config = Config(_configFilesFolder + "Config_test.yml")
 
@@ -38,7 +38,7 @@ def test_MustReturnSerialPort():
     assert "/dev/ttyS0" == serialPort
 
 
-def test_MustReturnUploadAddress():
+def test_must_return_upload_address():
 
     config = Config(_configFilesFolder + "Config_test.yml")
 
@@ -47,7 +47,7 @@ def test_MustReturnUploadAddress():
     assert "http://localhost:8080/" == address
 
 
-def test_MustReturnUploadApiKey():
+def test_must_return_upload_api_key():
 
     config = Config(_configFilesFolder + "Config_test.yml")
 
@@ -56,7 +56,7 @@ def test_MustReturnUploadApiKey():
     assert "ABCD1234" == apiKey
 
 
-def test_LoadedConfigMustContainTwoDevices():
+def test_loaded_config_must_contain_two_devices():
 
     config = Config(_configFilesFolder + "Config_test.yml")
 
@@ -67,7 +67,7 @@ def test_LoadedConfigMustContainTwoDevices():
     assert "80D4" in devices
 
 
-def test_GivenAnIdMustReturnADeviceObject():
+def test_given_an_id_must_return_a_device_object():
 
     config = Config(_configFilesFolder + "Config_test.yml")
 
@@ -76,7 +76,7 @@ def test_GivenAnIdMustReturnADeviceObject():
     assert device.id == "A3F6"
 
 
-def test_DevicesWithSubscriptionMustReturnOneValue():
+def test_devices_with_subscription_must_return_one_value():
 
     config = Config(_configFilesFolder + "Config_test.yml")
 

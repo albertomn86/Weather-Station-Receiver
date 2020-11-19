@@ -40,6 +40,9 @@ jobs:
         args: >
           -Dsonar.organization=albertomn86
           -Dsonar.projectKey=albertomn86_Weather-Station-Receiver
+          -Dsonar.python.coverage.reportPaths=coverage.xml
+          -Dsonar.sources=src/
+          -Dsonar.tests=tests/ 
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

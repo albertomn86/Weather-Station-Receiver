@@ -6,7 +6,7 @@ from src.FrameDecoder import FrameDecoder
 from src.DataUploader import ThingSpeakUploader
 
 
-def Run(config, source, logger, uploader):
+def run(config, source, logger, uploader):
     try:
         rawFrame = source.ReadFrame()
     except Exception as exception:
@@ -52,7 +52,7 @@ def main():
 
     logger.Write(logger.INFO, "Started")
     while True:
-        Run(config, socket, logger, ThingSpeakUploader)
+        run(config, socket, logger, ThingSpeakUploader)
 
 
 if __name__ == "__main__":

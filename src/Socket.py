@@ -4,7 +4,7 @@ import serial
 class Socket(object):
 
     def __init__(self, serialPort="/dev/ttyS0"):
-        self.socket = serial.Serial(
+        self._socket = serial.Serial(
             port=serialPort,
             baudrate=9600,
             parity=serial.PARITY_NONE,
@@ -14,7 +14,7 @@ class Socket(object):
         )
 
     def ReadFrame(self):
-        return self.socket.readline().decode()
+        return self._socket.readline().decode()
 
     def SendFrame(self, frame):
-        self.socket.write(frame.encode())
+        self._socket.write(frame.encode())

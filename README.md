@@ -1,5 +1,6 @@
 # Weather Station Receiver
 ![Python application](https://github.com/albertomn86/Weather-Station-Receiver/workflows/Python%20application/badge.svg?branch=master)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=albertomn86_Weather-Station-Receiver&metric=alert_status)](https://sonarcloud.io/dashboard?id=albertomn86_Weather-Station-Receiver)
 
 Weather Station data receiver for RaspberryPi. This application processes the data received from the [weather station](https://github.com/albertomn86/Weather-Station).
 

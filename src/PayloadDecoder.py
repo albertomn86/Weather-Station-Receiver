@@ -1,8 +1,9 @@
 from src.Payload import Payload
 
 
-class PayloadDecoder():
+class PayloadDecoder(object):
 
+    @staticmethod
     def Decode(raw):
         sampleList = raw.split(';')
         payload = Payload()

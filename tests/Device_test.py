@@ -2,56 +2,56 @@ from Device import Device
 from pytest import raises
 
 
-def test_GivenARawDeviceMustConvertIdToUppercase():
+def test_given_a_raw_device_must_convert_id_to_uppercase():
     raw = {"ID": "a3f6"}
     device = Device(raw)
 
     assert device.id == "A3F6"
 
 
-def test_GivenARawDeviceWithInvalidIdMustRaiseException():
+def test_given_a_raw_device_with_invalid_id_must_raise_exception():
     raw = {"ID": "a"}
 
     with raises(ValueError, match=r"Invalid ID"):
         Device(raw)
 
 
-def test_GivenARawDeviceWithoutIdMustRaiseException():
+def test_given_a_raw_device_without_id_must_raise_exception():
     raw = {"Interval": 300}
 
     with raises(ValueError, match=r"Invalid ID"):
         Device(raw)
 
 
-def test_GivenARawDeviceMustParseIntervalLowerThan60():
+def test_given_a_raw_device_must_parse_interval_lower_than_60():
     raw = {"ID": "A3F6", "Interval": 3}
     device = Device(raw)
 
     assert device.interval == 60
 
 
-def test_GivenARawDeviceMustParseAltitudeGreatherThan0():
+def test_given_a_raw_device_must_parse_altitude_greather_than_0():
     raw = {"ID": "A3F6", "Altitude": 848}
     device = Device(raw)
 
     assert device.altitude == 848
 
 
-def test_GivenARawDeviceMustParseAltitudeLowerThan0():
+def test_given_a_raw_device_must_parse_altitude_lower_than_0():
     raw = {"ID": "A3F6", "Altitude": -1}
     device = Device(raw)
 
     assert device.altitude == 0
 
 
-def test_GivenARawDeviceDictWithoutSubscriptionMustReturnDefault():
+def test_given_a_raw_device_without_subscription_must_return_default():
     raw = {"ID": "a3f6", "Interval": 300}
     device = Device(raw)
 
     assert ['I'] == device.subscriptionValues
 
 
-def test_GivenARawDeviceDictMustReturnOrderedSubscriptionList():
+def test_given_a_raw_device_must_return_ordered_subscription_list():
     raw = {
             "ID": "a3f6",
             "Subscription":
@@ -67,7 +67,7 @@ def test_GivenARawDeviceDictMustReturnOrderedSubscriptionList():
     assert "A3F6" == device.subscriptionDevice
 
 
-def test_GivenARawDeviceWithAnInvalidValueMustRaiseException():
+def test_given_a_raw_device_with_an_invalid_value_must_raise_exception():
     raw = {
             "ID": "a3f6",
             "Subscription":
@@ -82,7 +82,7 @@ def test_GivenARawDeviceWithAnInvalidValueMustRaiseException():
         Device(raw)
 
 
-def test_GivenARawDeviceWithoutSubscriptionDeviceMustRaiseException():
+def test_given_a_raw_device_without_subscription_must_raise_exception():
     raw = {
         "ID": "a3f6",
         "Subscription":

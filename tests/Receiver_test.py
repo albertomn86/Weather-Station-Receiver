@@ -7,7 +7,7 @@ from os import remove
 config = Config("tests/ConfigurationFiles/Config_test.yml")
 
 
-def test_ReceiverMustShowErrorIfFrameIsInvalid():
+def test_receiver_must_show_error_if_frame_is_invalid():
 
     logger = Logger()
     stub = StubReceiver()
@@ -20,7 +20,7 @@ def test_ReceiverMustShowErrorIfFrameIsInvalid():
     assert expectedMsg == logger.lastMessage
 
 
-def test_ReceiverMustShowErrorIfPayloadIsInvalid():
+def test_receiver_must_show_error_if_payload_is_invalid():
 
     logger = Logger()
     stub = StubReceiver()
@@ -33,7 +33,7 @@ def test_ReceiverMustShowErrorIfPayloadIsInvalid():
     assert expectedMsg == logger.lastMessage
 
 
-def test_ReceiverMustShowErrorIfPacketComesFromUnregisteredDevice():
+def test_receiver_must_show_error_if_packet_comes_from_unregistered_device():
 
     logger = Logger()
     stub = StubReceiver()
@@ -46,7 +46,7 @@ def test_ReceiverMustShowErrorIfPacketComesFromUnregisteredDevice():
     assert expectedMsg == logger.lastMessage
 
 
-def test_ReceiverMustSendFrameWhenAValidMessageIsReceived():
+def test_receiver_must_send_frame_when_a_valid_message_is_received():
 
     logger = Logger()
     stub = StubReceiver()

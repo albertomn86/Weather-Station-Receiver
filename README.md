@@ -15,12 +15,12 @@ pip3 install pyyaml pyserial requests
 ```
 
 ### Enable serial port
-The Raspberry Pi serial port is disabled by default. If we run the program, we will get the next error:
+The Raspberry Pi serial port is disabled by default. If we run the program, we will get the following error:
 ```
 08.Nov 2020 18:17:58 raspberrypi WS-Receiver: (ERROR) [Errno 2] could not open port /dev/ttyS0: [Errno 2] No such file or directory: '/dev/ttyS0'
 ```
 
-Tho enable the serial port follow the next steps:
+To enable the serial port follow the next steps:
 
 1. Open the configuration menu:
 ```

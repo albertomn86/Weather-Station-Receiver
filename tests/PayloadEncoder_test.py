@@ -2,7 +2,7 @@ from PayloadEncoder import PayloadEncoder
 from Payload import Payload
 
 
-def test_GivenAnOneElementPayloadMustReturnString():
+def test_given_an_one_element_payload_must_return_string():
     payload = Payload()
     payload.humidity = 77.0
 
@@ -11,7 +11,7 @@ def test_GivenAnOneElementPayloadMustReturnString():
     assert "H7700" == generated
 
 
-def test_GivenTwoElementsPayloadMustReturnString():
+def test_given_two_elements_payload_must_return_string():
     payload = Payload()
     payload.uvRadiation = 0.01
     payload.temperature = -1.01
@@ -21,7 +21,7 @@ def test_GivenTwoElementsPayloadMustReturnString():
     assert "T-101;U001" == generated
 
 
-def test_GivenFullPayloadMustReturnFullString():
+def test_given_full_payload_must_return_full_string():
     payload = Payload()
     payload.uvRadiation = 3.22
     payload.temperature = -1.0

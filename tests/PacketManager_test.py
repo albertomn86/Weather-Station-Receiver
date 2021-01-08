@@ -9,7 +9,7 @@ from json import dumps
 config = Config("tests/ConfigurationFiles/Config_test.yml")
 
 
-def test_ValifPacketFromNotRegisteredDeviceMustBeRejected():
+def test_valid_packet_from_unregistered_device_must_be_rejected():
 
     validFrame = "S80D3P101812;T-304;H8000;S12;I300;L3000;B419;U067"
     packet = Packet(validFrame)
@@ -19,7 +19,7 @@ def test_ValifPacketFromNotRegisteredDeviceMustBeRejected():
         packetManager.ProcessPacket(packet)
 
 
-def test_DecodeMustReturnDictionaryWithValidPacket():
+def test_decode_must_return_dictionary_with_valid_packet():
 
     validFrame = "S80D4P101812;T-304;H8000;S12;I300;L30000;B419;U067"
     packet = Packet(validFrame)
@@ -36,7 +36,7 @@ def test_DecodeMustReturnDictionaryWithValidPacket():
     assert expected == json_data
 
 
-def test_WhenADeviceHasSubscribedDevicesTheLastPayloadMustBeStored():
+def test_if_a_device_has_subscribed_devices_the_last_payload_must_be_stored():
 
     validFrame = "S80D4P101812;T-304;H8000;S12;I300;L3000;B419;U067"
     packet = Packet(validFrame)
@@ -52,7 +52,7 @@ def test_WhenADeviceHasSubscribedDevicesTheLastPayloadMustBeStored():
     assert found
 
 
-def test_WhenADeviceHasNotSubscribedDevicesTheMustNotBeStored():
+def test_if_a_device_has_not_subscribed_devices_payload_must_not_be_stored():
 
     validFrame = "SA3F6P101812;T-304;H8000;S12;I300;L3000;B419;U067"
     packet = Packet(validFrame)
@@ -66,7 +66,7 @@ def test_WhenADeviceHasNotSubscribedDevicesTheMustNotBeStored():
     assert not found
 
 
-def test_WhenGeneratinAResponseGivenAnInvalidIdMustAssert():
+def test_when_generating_a_response_give_an_invalid_id_must_assert():
 
     packetManager = PacketManager(config)
 
@@ -74,7 +74,7 @@ def test_WhenGeneratinAResponseGivenAnInvalidIdMustAssert():
         packetManager.GetResponseFrame("A3F0")
 
 
-def test_GivenAnIdWithSubscriptionMustGenerateAResponseFrame():
+def test_given_an_id_with_subscription_must_generate_a_response_frame():
 
     packetManager = PacketManager(config)
 
@@ -91,7 +91,7 @@ def test_GivenAnIdWithSubscriptionMustGenerateAResponseFrame():
     assert expectedSample == sample
 
 
-def test_GivenAnIdWithoutSubscriptionDataMustGenerateAResponseFrame():
+def test_given_an_id_with_subscription_must_generate_a_first_response_frame():
 
     packetManager = PacketManager(config)
 
@@ -102,7 +102,7 @@ def test_GivenAnIdWithoutSubscriptionDataMustGenerateAResponseFrame():
     assert expectedSample == sample
 
 
-def test_GivenAnIdWithoutNoSubscriptionGenerateAResponseFrame():
+def test_given_an_id_without_subscription_must_generate_a_response_frame():
 
     packetManager = PacketManager(config)
 

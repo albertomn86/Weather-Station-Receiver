@@ -2,7 +2,7 @@ from pytest import raises
 from FrameDecoder import FrameDecoder
 
 
-def test_ValidFrameMustHaveMoreThanSixCharacters():
+def test_valid_frame_must_have_more_than_six_characters():
 
     frame = "SA3D0#"
 
@@ -10,14 +10,14 @@ def test_ValidFrameMustHaveMoreThanSixCharacters():
         FrameDecoder(frame)
 
 
-def test_ValidFrameMustEndWithEndCharacter():
+def test_valid_frame_must_end_with_end_character():
 
     frame = "SA3F64FD0#"
 
     FrameDecoder(frame)
 
 
-def test_FramesWithInvalidTerminationMustReturnException():
+def test_frames_with_invalid_termination_must_return_exception():
 
     frame = "SA3F64FD0Q"
 
@@ -25,14 +25,14 @@ def test_FramesWithInvalidTerminationMustReturnException():
         FrameDecoder(frame)
 
 
-def test_ValidFrameMustStartWithDefinedHeader():
+def test_valid_frame_must_start_with_defined_header():
 
     frame = "K80D44FD0#"
 
     FrameDecoder(frame)
 
 
-def test_FramesWithInvalidFirstCharacterMustReturnException():
+def test_frames_with_invalid_first_character_must_return_exception():
 
     frame = "XA3F64FD0#"
 
@@ -40,7 +40,7 @@ def test_FramesWithInvalidFirstCharacterMustReturnException():
         FrameDecoder(frame)
 
 
-def test_ValidFrameMustReturnAValidPacket():
+def test_valid_frame_must_return_a_valid_packet():
 
     frame = "S80D4P101812;T-304;H8000#"
 

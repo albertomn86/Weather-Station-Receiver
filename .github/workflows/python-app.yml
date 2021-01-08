@@ -23,7 +23,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install flake8 pytest pyyaml pyserial requests
+        pip install pyyaml pyserial requests flake8 pytest coverage 
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Lint with flake8
       run: |
@@ -34,6 +34,10 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
+    - name: Generate coverage
+      run: |
+        coverage run -m pytest
+        coverage xml
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@v1.4
       with:

@@ -1,4 +1,4 @@
-from DataUploader import ThingSpeakGenerateUrl
+from DataUploader import thing_speak_generate_url
 from Config import Config
 from PacketManager import PacketManager
 from Packet import Packet
@@ -13,7 +13,7 @@ def test_thingspeak_generate_url_must_return_valid_url():
     packet = Packet(validFrame)
     payload = packetManager.ProcessPacket(packet)
 
-    url = ThingSpeakGenerateUrl(config, payload)
+    url = thing_speak_generate_url(config, payload)
 
     expectedUrl = "http://localhost:8080/?api_key=ABCD1234&field1=300" \
         + "&field2=12&field3=4.19&field4=30.87&field5=60.0" \

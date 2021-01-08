@@ -1,5 +1,6 @@
-class PayloadEncoder():
+class PayloadEncoder(object):
 
+    @staticmethod
     def Encode(payload):
         generated = ""
 

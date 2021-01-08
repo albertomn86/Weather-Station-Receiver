@@ -28,6 +28,7 @@ class Config(object):
             self._allowedDevicesIdList, \
             self._devicesWithSubsciption = Config._ParseDevices(self._config)
 
+    @staticmethod
     def _ParseReceiver(config):
         receiver = config.get("Receiver")
         if receiver is not None:
@@ -36,6 +37,7 @@ class Config(object):
                 return serialPort
         raise Exception("Serial port not specified")
 
+    @staticmethod
     def _ParseUpload(config):
         address = None
         apiKey = None
@@ -45,6 +47,7 @@ class Config(object):
             apiKey = upload.get("ApiKey")
         return address, apiKey
 
+    @staticmethod
     def _ParseDevices(config):
         devices = config.get("Devices")
         if devices is None:

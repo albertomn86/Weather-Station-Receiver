@@ -7,23 +7,27 @@ class Device(object):
             Device._ValidateSubscription(raw.get("Subscription"))
         self.altitude = Device._ValidateAltitude(raw.get("Altitude"))
 
+    @staticmethod
     def _ValidateId(rawId):
         if rawId is None or len(rawId) != 4:
             raise ValueError("Invalid ID")
 
         return rawId.upper()
 
+    @staticmethod
     def _ValidateInterval(interval):
         if interval is None or interval < 60:
             return 60
         else:
             return interval
 
+    @staticmethod
     def _ValidateAltitude(altitude):
         if altitude is None or altitude < 0:
             altitude = 0
         return altitude
 
+    @staticmethod
     def _ValidateSubscription(rawSubscription):
         subscription = ['I']
         device = None

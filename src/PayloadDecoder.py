@@ -38,6 +38,7 @@ class PayloadDecoder():
 
         return payload
 
+    @staticmethod
     def _ParseTemperature(sample):
         value = int(sample[1:])
         value /= 100.0
@@ -47,6 +48,7 @@ class PayloadDecoder():
 
         return value
 
+    @staticmethod
     def _ParseHumidity(sample):
         value = int(sample[1:])
         value /= 100.0
@@ -56,6 +58,7 @@ class PayloadDecoder():
 
         return value
 
+    @staticmethod
     def _ParseLuminosity(sample):
         value = int(sample[1:])
         value /= 100.0
@@ -65,6 +68,7 @@ class PayloadDecoder():
 
         return value
 
+    @staticmethod
     def _ParseStatus(sample):
         value = int(sample[1:])
 
@@ -73,6 +77,7 @@ class PayloadDecoder():
 
         return value
 
+    @staticmethod
     def _ParseBattery(sample):
         value = int(sample[1:])
         value /= 100.0
@@ -82,6 +87,7 @@ class PayloadDecoder():
 
         return value
 
+    @staticmethod
     def _ParseInterval(sample):
         value = int(sample[1:])
 
@@ -90,6 +96,7 @@ class PayloadDecoder():
 
         return value
 
+    @staticmethod
     def _ParseUVRadiation(sample):
         value = int(sample[1:])
         value /= 100.0
@@ -99,6 +106,7 @@ class PayloadDecoder():
 
         return value
 
+    @staticmethod
     def _ParsePressure(sample):
         value = int(sample[1:])
         value /= 100.0

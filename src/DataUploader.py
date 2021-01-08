@@ -1,7 +1,7 @@
 import requests
 
 
-def ThingSpeakGenerateUrl(config, payload):
+def thing_speak_generate_url(config, payload):
     uploadUrl = config.GetUploadAddress()
     apiKey = config.GetUploadApiKey()
 
@@ -20,8 +20,8 @@ def ThingSpeakGenerateUrl(config, payload):
     return url
 
 
-def ThingSpeakUploader(config, payload):
-    url = ThingSpeakGenerateUrl(config, payload)
+def thing_speak_uploader(config, payload):
+    url = thing_speak_generate_url(config, payload)
     try:
         requests.get(url)
     except Exception as exception:

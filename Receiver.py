@@ -3,7 +3,7 @@ from src.Socket import Socket
 from src.Logger import Logger
 from src.PacketManager import PacketManager
 from src.FrameDecoder import FrameDecoder
-from src.DataUploader import ThingSpeakUploader
+from src.DataUploader import thing_speak_uploader
 
 
 def run(config, source, logger, uploader):
@@ -52,7 +52,7 @@ def main():
 
     logger.Write(logger.INFO, "Started")
     while True:
-        run(config, socket, logger, ThingSpeakUploader)
+        run(config, socket, logger, thing_speak_uploader)
 
 
 if __name__ == "__main__":

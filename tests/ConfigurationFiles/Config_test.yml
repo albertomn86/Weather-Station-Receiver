@@ -12,3 +12,5 @@ Devices:
   - ID: 80D4
     Interval: 600
     Altitude: 848
+  - ID: 80D4
+    Interval: 100

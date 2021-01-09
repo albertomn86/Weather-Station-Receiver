@@ -59,6 +59,8 @@ class Config(object):
         devices_with_subscription = []
         for item in devices:
             device = Device(item)
+            if device.id in allowed_id_list:
+                continue
             device_list.append(device)
             allowed_id_list.append(device.id)
             if device.subscription_device is not None:

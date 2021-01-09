@@ -56,7 +56,7 @@ def test_must_return_upload_api_key():
     assert "ABCD1234" == api_key
 
 
-def test_loaded_config_must_contain_two_devices():
+def test_loaded_config_must_ignore_repeated_devices():
 
     config = Config(config_files_folder + "Config_test.yml")
 

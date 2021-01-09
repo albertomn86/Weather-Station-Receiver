@@ -5,10 +5,10 @@ class PayloadDecoder(object):
 
     @staticmethod
     def decode(raw):
-        sampleList = raw.split(';')
+        sample_list = raw.split(';')
         payload = Payload()
 
-        for sample in sampleList:
+        for sample in sample_list:
 
             if sample[0] == 'T':
                 payload.temperature = \

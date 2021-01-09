@@ -22,7 +22,4 @@ def thing_speak_generate_url(config, payload):
 
 def thing_speak_uploader(config, payload):
     url = thing_speak_generate_url(config, payload)
-    try:
-        requests.get(url)
-    except Exception as exception:
-        raise exception
+    requests.get(url)

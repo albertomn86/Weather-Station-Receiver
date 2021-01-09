@@ -14,10 +14,10 @@ class Config(object):
             try:
                 self.__config = safe_load(stream)
             except YAMLError:
-                raise Exception(f"Invalid configuration file: {file}")
+                raise ConfigException(f"Invalid configuration file: {file}")
 
         if self.__config is None:
-            raise Exception(f"Empty configuration file: {file}")
+            raise ConfigException(f"Empty configuration file: {file}")
 
         self.__serial_port = Config.__parse_receiver(self.__config)
 
@@ -36,7 +36,7 @@ class Config(object):
             serial_port = receiver.get("SerialPort")
             if serial_port is not None:
                 return serial_port
-        raise Exception("Serial port not specified")
+        raise ConfigException("Serial port not specified")
 
     @staticmethod
     def __parse_upload(config):
@@ -52,7 +52,7 @@ class Config(object):
     def __parse_devices(config):
         devices = config.get("Devices")
         if devices is None:
-            raise Exception("No devices found")
+            raise ConfigException("No devices found")
 
         device_list = []
         allowed_id_list = []
@@ -83,3 +83,7 @@ class Config(object):
 
     def get_upload_api_key(self):
         return self.__upload_api_key
+
+
+class ConfigException(Exception):
+    pass

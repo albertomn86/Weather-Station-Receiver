@@ -1,5 +1,5 @@
 from pytest import raises
-from Config import Config
+from Config import Config, ConfigException
 
 
 config_files_folder = "tests/ConfigurationFiles/"
@@ -13,19 +13,19 @@ def test_must_assert_if_config_file_does_not_exist():
 
 def test_must_assert_if_config_file_is_not_valid():
 
-    with raises(Exception, match=r"Invalid configuration file: .*"):
+    with raises(ConfigException, match=r"Invalid configuration file: .*"):
         Config(config_files_folder + "Config_test_invalid.yml")
 
 
 def test_must_assert_when_there_are_no_devices_defined():
 
-    with raises(Exception, match=r"No devices found"):
+    with raises(ConfigException, match=r"No devices found"):
         Config(config_files_folder + "Config_test_empty.yml")
 
 
 def test_must_assert_when_serial_port_is_not_specified():
 
-    with raises(Exception, match=r"Serial port not specified"):
+    with raises(ConfigException, match=r"Serial port not specified"):
         Config(config_files_folder + "Config_test_serial.yml")
 
 

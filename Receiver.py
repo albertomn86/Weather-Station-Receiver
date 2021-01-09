@@ -11,8 +11,6 @@ def run(config, source, logger, uploader):
         raw_frame = source.read_frame()
     except Exception as exception:
         logger.Write(logger.WARN, str(exception))
-
-    if not raw_frame:
         return
 
     try:

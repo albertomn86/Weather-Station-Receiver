@@ -44,11 +44,11 @@ def test_valid_frame_must_return_a_valid_packet():
 
     frame = "S80D4P101812;T-304;H8000#"
 
-    decodedFrame = FrameDecoder(frame)
-    packet = decodedFrame.GetPacket()
+    decoded_frame = FrameDecoder(frame)
+    packet = decoded_frame.get_packet()
 
     assert packet.type == "S"
-    assert packet.deviceId == "80D4"
+    assert packet.device_id == "80D4"
     assert packet.payload.temperature == -3.04
     assert packet.payload.humidity == 80.0
     assert packet.payload.pressure == 1018.12

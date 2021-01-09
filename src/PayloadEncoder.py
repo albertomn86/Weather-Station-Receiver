@@ -1,37 +1,37 @@
 class PayloadEncoder(object):
 
     @staticmethod
-    def Encode(payload):
+    def encode(payload):
         generated = ""
 
         if payload.battery is not None:
-            generated += f"B{EncodeDecimal(payload.battery)};"
+            generated += f"B{encode_decimal(payload.battery)};"
 
         if payload.humidity is not None:
-            generated += f"H{EncodeDecimal(payload.humidity)};"
+            generated += f"H{encode_decimal(payload.humidity)};"
 
         if payload.interval is not None:
             generated += f"I{payload.interval};"
 
         if payload.luminosity is not None:
-            generated += f"L{EncodeDecimal(payload.luminosity)};"
+            generated += f"L{encode_decimal(payload.luminosity)};"
 
         if payload.pressure is not None:
-            generated += f"P{EncodeDecimal(payload.pressure)};"
+            generated += f"P{encode_decimal(payload.pressure)};"
 
         if payload.status is not None:
             generated += f"S{payload.status};"
 
         if payload.temperature is not None:
-            generated += f"T{EncodeDecimal(payload.temperature)};"
+            generated += f"T{encode_decimal(payload.temperature)};"
 
-        if payload.uvRadiation is not None:
-            generated += f"U{EncodeDecimal(payload.uvRadiation)};"
+        if payload.uv_radiation is not None:
+            generated += f"U{encode_decimal(payload.uv_radiation)};"
 
         return generated[:-1]
 
 
-def EncodeDecimal(value):
+def encode_decimal(value):
     encoded = "{0:.2f}".format(value)
     encoded = encoded.replace(".", "")
     return encoded

@@ -8,9 +8,9 @@ class Payload(object):
         self.humidity = None
         self.pressure = None
         self.luminosity = None
-        self.uvRadiation = None
+        self.uv_radiation = None
 
-    def GetValues(self):
+    def get_values(self):
         values = {}
         values['interval'] = self.interval
         values['status'] = self.status
@@ -19,11 +19,11 @@ class Payload(object):
         values['humidity'] = self.humidity
         values['pressure'] = self.pressure
         values['luminosity'] = self.luminosity
-        values['uvRadiation'] = self.uvRadiation
+        values['uvRadiation'] = self.uv_radiation
 
         return values
 
-    def KeepValues(self, values):
+    def keep_values(self, values):
         if 'I' not in values:
             self.interval = None
         if 'S' not in values:
@@ -39,4 +39,4 @@ class Payload(object):
         if 'L' not in values:
             self.luminosity = None
         if 'U' not in values:
-            self.uvRadiation = None
+            self.uv_radiation = None

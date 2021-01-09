@@ -12,73 +12,74 @@ class Config(object):
 
         with open(file, 'r') as stream:
             try:
-                self._config = safe_load(stream)
+                self.__config = safe_load(stream)
             except YAMLError:
                 raise Exception(f"Invalid configuration file: {file}")
 
-        if self._config is None:
+        if self.__config is None:
             raise Exception(f"Empty configuration file: {file}")
 
-        self._serialPort = Config._ParseReceiver(self._config)
+        self.__serial_port = Config.__parse_receiver(self.__config)
 
-        self._uploadAddres, \
-            self._uploadApiKey = Config._ParseUpload(self._config)
+        self.__upload_addres, \
+            self.__upload_api_key = Config.__parse_upload(self.__config)
 
-        self._devicesList, \
-            self._allowedDevicesIdList, \
-            self._devicesWithSubsciption = Config._ParseDevices(self._config)
+        self.__devices_list, \
+            self.__allowed_devices_id_list, \
+            self.__devices_with_subsciption = \
+            Config.__parse_devices(self.__config)
 
     @staticmethod
-    def _ParseReceiver(config):
+    def __parse_receiver(config):
         receiver = config.get("Receiver")
         if receiver is not None:
-            serialPort = receiver.get("SerialPort")
-            if serialPort is not None:
-                return serialPort
+            serial_port = receiver.get("SerialPort")
+            if serial_port is not None:
+                return serial_port
         raise Exception("Serial port not specified")
 
     @staticmethod
-    def _ParseUpload(config):
+    def __parse_upload(config):
         address = None
-        apiKey = None
+        api_key = None
         upload = config.get("Upload")
         if upload is not None:
             address = upload.get("Address")
-            apiKey = upload.get("ApiKey")
-        return address, apiKey
+            api_key = upload.get("ApiKey")
+        return address, api_key
 
     @staticmethod
-    def _ParseDevices(config):
+    def __parse_devices(config):
         devices = config.get("Devices")
         if devices is None:
             raise Exception("No devices found")
 
-        deviceList = []
-        allowedIdList = []
-        devicesWithSubscription = []
+        device_list = []
+        allowed_id_list = []
+        devices_with_subscription = []
         for item in devices:
             device = Device(item)
-            deviceList.append(device)
-            allowedIdList.append(device.id)
-            if device.subscriptionDevice is not None:
-                devicesWithSubscription.append(device.subscriptionDevice)
+            device_list.append(device)
+            allowed_id_list.append(device.id)
+            if device.subscription_device is not None:
+                devices_with_subscription.append(device.subscription_device)
 
-        return deviceList, allowedIdList, devicesWithSubscription
+        return device_list, allowed_id_list, devices_with_subscription
 
-    def GetValidDevicesIdList(self):
-        return self._allowedDevicesIdList
+    def get_valid_devices_id_list(self):
+        return self.__allowed_devices_id_list
 
-    def GetDeviceById(self, id):
-        return [x for x in self._devicesList if x.id == id][0]
+    def get_device_by_id(self, id):
+        return [x for x in self.__devices_list if x.id == id][0]
 
-    def GetDevicesWithSubscriptionIdList(self):
-        return self._devicesWithSubsciption
+    def get_devices_with_subscription(self):
+        return self.__devices_with_subsciption
 
-    def GetReceiverSerialPort(self):
-        return self._serialPort
+    def get_receiver_serial_port(self):
+        return self.__serial_port
 
-    def GetUploadAddress(self):
-        return self._uploadAddres
+    def get_upload_address(self):
+        return self.__upload_addres
 
-    def GetUploadApiKey(self):
-        return self._uploadApiKey
+    def get_upload_api_key(self):
+        return self.__upload_api_key

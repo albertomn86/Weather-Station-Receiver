@@ -1,38 +1,38 @@
 class Device(object):
 
     def __init__(self, raw):
-        self.id = Device._ValidateId(raw.get("ID"))
-        self.interval = Device._ValidateInterval(raw.get("Interval"))
-        self.subscriptionDevice, self.subscriptionValues = \
-            Device._ValidateSubscription(raw.get("Subscription"))
-        self.altitude = Device._ValidateAltitude(raw.get("Altitude"))
+        self.id = Device.__validate_id(raw.get("ID"))
+        self.interval = Device.__validate_interval(raw.get("Interval"))
+        self.subscription_device, self.subscription_values = \
+            Device.__validate_subscription(raw.get("Subscription"))
+        self.altitude = Device.__validate_altitude(raw.get("Altitude"))
 
     @staticmethod
-    def _ValidateId(rawId):
-        if rawId is None or len(rawId) != 4:
+    def __validate_id(raw_id):
+        if raw_id is None or len(raw_id) != 4:
             raise ValueError("Invalid ID")
 
-        return rawId.upper()
+        return raw_id.upper()
 
     @staticmethod
-    def _ValidateInterval(interval):
+    def __validate_interval(interval):
         if interval is None or interval < 60:
             return 60
         else:
             return interval
 
     @staticmethod
-    def _ValidateAltitude(altitude):
+    def __validate_altitude(altitude):
         if altitude is None or altitude < 0:
             altitude = 0
         return altitude
 
     @staticmethod
-    def _ValidateSubscription(rawSubscription):
+    def __validate_subscription(raw_subscription):
         subscription = ['I']
         device = None
-        if rawSubscription is not None:
-            values = rawSubscription.get("Values").split(',')
+        if raw_subscription is not None:
+            values = raw_subscription.get("Values").split(',')
             for item in values:
                 item = item.upper().strip()
                 if item in ['T', 'H', 'P', 'U', 'L', 'S', 'B']:
@@ -41,7 +41,7 @@ class Device(object):
                     raise ValueError(f"Invalid subscription value: '{item}'")
             subscription.sort()
 
-            device = rawSubscription.get("Device")
+            device = raw_subscription.get("Device")
             if device is None:
                 raise ValueError("Subscription device not found")
 

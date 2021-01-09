@@ -10,50 +10,51 @@ def current_milli_time():
 class PacketManager(object):
 
     def __init__(self, config):
-        self._config = config
+        self.__config = config
 
-    def ProcessPacket(self, packet, ts=current_milli_time()):
-        if packet.deviceId not in self._config.GetValidDevicesIdList():
+    def process_packet(self, packet, ts=current_milli_time()):
+        if packet.device_id not in self.__config.get_valid_devices_id_list():
             raise ValueError(
-                f"Packet from unregistered device: {packet.deviceId}")
+                f"Packet from unregistered device: {packet.device_id}")
 
-        if packet.deviceId in self._config.GetDevicesWithSubscriptionIdList():
-            PacketSaver.SaveDataForSubscription(packet)
+        if packet.device_id in self.__config.get_devices_with_subscription():
+            PacketSaver.save_data_for_subscription(packet)
 
-        payloadValues = packet.payload.GetValues()
-        payloadValues['deviceId'] = packet.deviceId
+        payload_values = packet.payload.get_values()
+        payload_values['deviceId'] = packet.device_id
 
-        currentPressure = payloadValues['pressure']
-        if currentPressure is not None:
-            device = self._config.GetDeviceById(packet.deviceId)
-            seaLevelPressure = PacketManager.getSeaLevelPressure(
-                currentPressure, device.altitude)
-            payloadValues['pressure'] = seaLevelPressure
+        current_pressure = payload_values['pressure']
+        if current_pressure is not None:
+            device = self.__config.get_device_by_id(packet.device_id)
+            sea_level_pressure = PacketManager.get_sea_level_pressure(
+                current_pressure, device.altitude)
+            payload_values['pressure'] = sea_level_pressure
 
         data = {}
         data['ts'] = ts
-        data['values'] = payloadValues
+        data['values'] = payload_values
 
         return data
 
-    def GetResponseFrame(self, deviceId):
-        if deviceId not in self._config.GetValidDevicesIdList():
-            raise ValueError(f"Invalid device ID: {deviceId}")
+    def get_response_frame(self, device_id):
+        if device_id not in self.__config.get_valid_devices_id_list():
+            raise ValueError(f"Invalid device ID: {device_id}")
 
-        deviceConfig = self._config.GetDeviceById(deviceId)
-        subscribedDevice = deviceConfig.subscriptionDevice
-        subscribedDeviceValues = deviceConfig.subscriptionValues
+        device_config = self.__config.get_device_by_id(device_id)
+        subscribed_device = device_config.subscription_device
+        subscribed_device_values = device_config.subscription_values
 
-        newPayload = PacketSaver.GetSavedPayloadFromFile(subscribedDevice)
-        newPayload.KeepValues(subscribedDeviceValues)
-        newPayload.interval = deviceConfig.interval
+        new_payload = \
+            PacketSaver.get_saved_payload_from_file(subscribed_device)
+        new_payload.keep_values(subscribed_device_values)
+        new_payload.interval = device_config.interval
 
-        encodedPayload = PayloadEncoder.Encode(newPayload)
+        encoded_payload = PayloadEncoder.encode(new_payload)
 
-        return f"K{deviceId}{encodedPayload}#"
+        return f"K{device_id}{encoded_payload}#"
 
     @staticmethod
-    def getSeaLevelPressure(pressure, altitude):
-        seaLevelPressure = \
+    def get_sea_level_pressure(pressure, altitude):
+        sea_level_pressure = \
             pressure / pow(1.0 - (0.000022557 * altitude), 5.256)
-        return round(seaLevelPressure, 2)
+        return round(sea_level_pressure, 2)

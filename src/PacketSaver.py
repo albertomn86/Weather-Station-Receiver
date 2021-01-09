@@ -6,16 +6,16 @@ from src.Payload import Payload
 class PacketSaver():
 
     @staticmethod
-    def SaveDataForSubscription(packet):
-        with open(f"{packet.deviceId}.tmp", "wb") as tmpFile:
-            pickle.dump(packet.payload, tmpFile, pickle.HIGHEST_PROTOCOL)
+    def save_data_for_subscription(packet):
+        with open(f"{packet.device_id}.tmp", "wb") as tmp_file:
+            pickle.dump(packet.payload, tmp_file, pickle.HIGHEST_PROTOCOL)
 
     @staticmethod
-    def GetSavedPayloadFromFile(deviceId):
-        tmpFileName = f"{deviceId}.tmp"
-        if path.exists(tmpFileName):
-            with open(tmpFileName, "rb") as tmpFile:
-                payload = pickle.load(tmpFile)
+    def get_saved_payload_from_file(device_id):
+        tmp_filename = f"{device_id}.tmp"
+        if path.exists(tmp_filename):
+            with open(tmp_filename, "rb") as tmp_file:
+                payload = pickle.load(tmp_file)
                 return payload
         else:
             return Payload()

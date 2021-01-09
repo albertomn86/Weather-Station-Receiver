@@ -48,7 +48,7 @@ def test_given_a_raw_device_without_subscription_must_return_default():
     raw = {"ID": "a3f6", "Interval": 300}
     device = Device(raw)
 
-    assert ['I'] == device.subscriptionValues
+    assert ['I'] == device.subscription_values
 
 
 def test_given_a_raw_device_must_return_ordered_subscription_list():
@@ -63,8 +63,8 @@ def test_given_a_raw_device_must_return_ordered_subscription_list():
         }
     device = Device(raw)
 
-    assert ['B', 'H', 'I', 'L', 'P', 'T', 'U'] == device.subscriptionValues
-    assert "A3F6" == device.subscriptionDevice
+    assert ['B', 'H', 'I', 'L', 'P', 'T', 'U'] == device.subscription_values
+    assert "A3F6" == device.subscription_device
 
 
 def test_given_a_raw_device_with_an_invalid_value_must_raise_exception():

@@ -5,5 +5,5 @@ class Packet(object):
 
     def __init__(self, frame):
         self.type = frame[0]
-        self.deviceId = frame[1:5]
-        self.payload = PayloadDecoder.Decode(frame[5:])
+        self.device_id = frame[1:5]
+        self.payload = PayloadDecoder.decode(frame[5:])

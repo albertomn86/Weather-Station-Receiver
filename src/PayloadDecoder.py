@@ -4,35 +4,37 @@ from src.Payload import Payload
 class PayloadDecoder(object):
 
     @staticmethod
-    def Decode(raw):
+    def decode(raw):
         sampleList = raw.split(';')
         payload = Payload()
 
         for sample in sampleList:
 
             if sample[0] == 'T':
-                payload.temperature = PayloadDecoder._ParseTemperature(sample)
+                payload.temperature = \
+                    PayloadDecoder.__parse_temperature(sample)
 
             elif sample[0] == 'H':
-                payload.humidity = PayloadDecoder._ParseHumidity(sample)
+                payload.humidity = PayloadDecoder.__parse_humidity(sample)
 
             elif sample[0] == 'P':
-                payload.pressure = PayloadDecoder._ParsePressure(sample)
+                payload.pressure = PayloadDecoder.__parse_pressure(sample)
 
             elif sample[0] == 'L':
-                payload.luminosity = PayloadDecoder._ParseLuminosity(sample)
+                payload.luminosity = PayloadDecoder.__parse_luminosity(sample)
 
             elif sample[0] == 'S':
-                payload.status = PayloadDecoder._ParseStatus(sample)
+                payload.status = PayloadDecoder.__parse_status(sample)
 
             elif sample[0] == 'B':
-                payload.battery = PayloadDecoder._ParseBattery(sample)
+                payload.battery = PayloadDecoder.__parse_battery(sample)
 
             elif sample[0] == 'I':
-                payload.interval = PayloadDecoder._ParseInterval(sample)
+                payload.interval = PayloadDecoder.__parse_interval(sample)
 
             elif sample[0] == 'U':
-                payload.uvRadiation = PayloadDecoder._ParseUVRadiation(sample)
+                payload.uv_radiation = \
+                    PayloadDecoder.__parse_uv_radiation(sample)
 
             else:
                 raise ValueError(f"Payload not valid: {sample}")
@@ -40,7 +42,7 @@ class PayloadDecoder(object):
         return payload
 
     @staticmethod
-    def _ParseTemperature(sample):
+    def __parse_temperature(sample):
         value = int(sample[1:])
         value /= 100.0
 
@@ -50,7 +52,7 @@ class PayloadDecoder(object):
         return value
 
     @staticmethod
-    def _ParseHumidity(sample):
+    def __parse_humidity(sample):
         value = int(sample[1:])
         value /= 100.0
 
@@ -60,7 +62,7 @@ class PayloadDecoder(object):
         return value
 
     @staticmethod
-    def _ParseLuminosity(sample):
+    def __parse_luminosity(sample):
         value = int(sample[1:])
         value /= 100.0
 
@@ -70,7 +72,7 @@ class PayloadDecoder(object):
         return value
 
     @staticmethod
-    def _ParseStatus(sample):
+    def __parse_status(sample):
         value = int(sample[1:])
 
         if value < 0 or value > 31:
@@ -79,7 +81,7 @@ class PayloadDecoder(object):
         return value
 
     @staticmethod
-    def _ParseBattery(sample):
+    def __parse_battery(sample):
         value = int(sample[1:])
         value /= 100.0
 
@@ -89,7 +91,7 @@ class PayloadDecoder(object):
         return value
 
     @staticmethod
-    def _ParseInterval(sample):
+    def __parse_interval(sample):
         value = int(sample[1:])
 
         if value <= 0:
@@ -98,7 +100,7 @@ class PayloadDecoder(object):
         return value
 
     @staticmethod
-    def _ParseUVRadiation(sample):
+    def __parse_uv_radiation(sample):
         value = int(sample[1:])
         value /= 100.0
 
@@ -108,7 +110,7 @@ class PayloadDecoder(object):
         return value
 
     @staticmethod
-    def _ParsePressure(sample):
+    def __parse_pressure(sample):
         value = int(sample[1:])
         value /= 100.0
 

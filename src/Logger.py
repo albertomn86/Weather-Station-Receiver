@@ -8,18 +8,18 @@ class Logger(object):
     ERR = "ERROR"
     INFO = "INFO"
 
-    def __init__(self, outputEnabled=False):
-        self.lastMessage = ""
-        self.output = outputEnabled
+    def __init__(self, output_enabled=False):
+        self.last_message = ""
+        self.__output = output_enabled
 
-    def Write(self, msgType, message):
-        self.lastMessage = message
-        if self.output:
-            print(self.FormatOutput(msgType, message))
+    def write(self, msg_type, message):
+        self.last_message = message
+        if self.__output:
+            print(Logger.format_output(msg_type, message))
 
     @staticmethod
-    def FormatOutput(msgType, message):
-        timeNow = datetime.datetime.now().strftime("%d.%b %Y %H:%M:%S")
+    def format_output(msg_type, message):
+        timenow = datetime.datetime.now().strftime("%d.%b %Y %H:%M:%S")
         hostname = socket.gethostname()
-        output = f"{timeNow} {hostname} WS-Receiver: ({msgType}) {message}"
+        output = f"{timenow} {hostname} WS-Receiver: ({msg_type}) {message}"
         return output

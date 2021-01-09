@@ -3,9 +3,9 @@ import serial
 
 class Socket(object):
 
-    def __init__(self, serialPort="/dev/ttyS0"):
+    def __init__(self, serial_port="/dev/ttyS0"):
         self._socket = serial.Serial(
-            port=serialPort,
+            port=serial_port,
             baudrate=9600,
             parity=serial.PARITY_NONE,
             stopbits=serial.STOPBITS_ONE,
@@ -13,8 +13,8 @@ class Socket(object):
             timeout=1
         )
 
-    def ReadFrame(self):
+    def read_frame(self):
         return self._socket.readline().decode()
 
-    def SendFrame(self, frame):
+    def send_frame(self, frame):
         self._socket.write(frame.encode())

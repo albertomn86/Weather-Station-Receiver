@@ -4,6 +4,7 @@ from src.Logger import Logger
 from src.PacketManager import PacketManager
 from src.FrameDecoder import FrameDecoder
 from src.DataUploader import thing_speak_uploader
+from src.Radio import Radio
 
 
 def run(config, source, logger, uploader):
@@ -44,6 +45,7 @@ def main():
         config = Config('Config.yml')
         serial_port = config.get_receiver_serial_port()
         socket = Socket(serial_port)
+        Radio(socket).config()
     except Exception as exception:
         logger.write(logger.ERR, str(exception))
         exit(1)

@@ -3,14 +3,14 @@ from src.Packet import Packet
 
 class FrameDecoder(object):
 
-    def __init__(self, frame):
+    def __init__(self, frame: str):
         if FrameDecoder.__is_valid(frame):
             self.content = frame
         else:
             raise ValueError(f"Invalid frame: {frame}")
 
     @staticmethod
-    def __is_valid(test_frame):
+    def __is_valid(test_frame: str) -> bool:
         if len(test_frame) <= 6:
             return False
 
@@ -22,7 +22,7 @@ class FrameDecoder(object):
 
         return True
 
-    def get_packet(self):
+    def get_packet(self) -> Packet:
         packet = Packet(self.content[:-1])
 
         return packet

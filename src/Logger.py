@@ -12,13 +12,13 @@ class Logger(object):
         self.last_message = ""
         self.__output = output_enabled
 
-    def write(self, msg_type, message):
+    def write(self, msg_type: str, message: str) -> None:
         self.last_message = message
         if self.__output:
             print(Logger.format_output(msg_type, message))
 
     @staticmethod
-    def format_output(msg_type, message):
+    def format_output(msg_type: str, message: str) -> str:
         timenow = datetime.datetime.now().strftime("%d.%b %Y %H:%M:%S")
         hostname = socket.gethostname()
         output = f"{timenow} {hostname} WS-Receiver: ({msg_type}) {message}"

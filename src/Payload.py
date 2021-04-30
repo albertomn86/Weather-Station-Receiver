@@ -10,7 +10,7 @@ class Payload(object):
         self.luminosity = None
         self.uv_radiation = None
 
-    def get_values(self):
+    def get_values(self) -> dict:
         values = {}
         values['interval'] = self.interval
         values['status'] = self.status
@@ -23,7 +23,7 @@ class Payload(object):
 
         return values
 
-    def keep_values(self, values):
+    def keep_values(self, values: list):
         if 'I' not in values:
             self.interval = None
         if 'S' not in values:

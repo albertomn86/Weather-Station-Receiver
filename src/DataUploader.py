@@ -1,11 +1,12 @@
 import requests
+from src.Config import Config
 
 
-def thing_speak_generate_url(config, payload):
+def thing_speak_generate_url(config: Config, data: dict) -> str:
     upload_url = config.get_upload_address()
     api_key = config.get_upload_api_key()
 
-    values = payload['values']
+    values = data['values']
     fields = "&field1=" + str(values['interval'])
     fields += "&field2=" + str(values['status'])
     fields += "&field3=" + str(values['battery'])
@@ -20,6 +21,6 @@ def thing_speak_generate_url(config, payload):
     return url
 
 
-def thing_speak_uploader(config, payload):
-    url = thing_speak_generate_url(config, payload)
+def thing_speak_uploader(config: Config, data: dict):
+    url = thing_speak_generate_url(config, data)
     requests.get(url)

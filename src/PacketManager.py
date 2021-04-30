@@ -1,4 +1,5 @@
 from time import time
+from src.Packet import Packet
 from src.PacketSaver import PacketSaver
 from src.PayloadEncoder import PayloadEncoder
 
@@ -12,7 +13,7 @@ class PacketManager(object):
     def __init__(self, config):
         self.__config = config
 
-    def process_packet(self, packet, ts=current_milli_time()):
+    def process_packet(self, packet: Packet, ts=current_milli_time()) -> dict:
         if packet.device_id not in self.__config.get_valid_devices_id_list():
             raise ValueError(
                 f"Packet from unregistered device: {packet.device_id}")
@@ -26,9 +27,8 @@ class PacketManager(object):
         current_pressure = payload_values['pressure']
         if current_pressure is not None:
             device = self.__config.get_device_by_id(packet.device_id)
-            sea_level_pressure = PacketManager.get_sea_level_pressure(
+            payload_values['pressure'] = PacketManager.get_sea_level_pressure(
                 current_pressure, device.altitude)
-            payload_values['pressure'] = sea_level_pressure
 
         data = {}
         data['ts'] = ts
@@ -36,7 +36,7 @@ class PacketManager(object):
 
         return data
 
-    def get_response_frame(self, device_id):
+    def get_response_frame(self, device_id: str) -> str:
         if device_id not in self.__config.get_valid_devices_id_list():
             raise ValueError(f"Invalid device ID: {device_id}")
 
@@ -54,7 +54,7 @@ class PacketManager(object):
         return f"K{device_id}{encoded_payload}#"
 
     @staticmethod
-    def get_sea_level_pressure(pressure, altitude):
+    def get_sea_level_pressure(pressure: float, altitude: int) -> float:
         sea_level_pressure = \
             pressure / pow(1.0 - (0.000022557 * altitude), 5.256)
         return round(sea_level_pressure, 2)

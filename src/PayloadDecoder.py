@@ -4,8 +4,8 @@ from src.Payload import Payload
 class PayloadDecoder(object):
 
     @staticmethod
-    def decode(raw):
-        sample_list = raw.split(';')
+    def decode(raw_data: str) -> Payload:
+        sample_list = raw_data.split(';')
         payload = Payload()
 
         for sample in sample_list:
@@ -42,8 +42,8 @@ class PayloadDecoder(object):
         return payload
 
     @staticmethod
-    def __parse_temperature(sample):
-        value = int(sample[1:])
+    def __parse_temperature(sample: str) -> float:
+        value = float(sample[1:])
         value /= 100.0
 
         if value < -20.0 or value > 50.0:
@@ -52,8 +52,8 @@ class PayloadDecoder(object):
         return value
 
     @staticmethod
-    def __parse_humidity(sample):
-        value = int(sample[1:])
+    def __parse_humidity(sample: str) -> float:
+        value = float(sample[1:])
         value /= 100.0
 
         if value < 0.0 or value > 100.0:
@@ -62,8 +62,8 @@ class PayloadDecoder(object):
         return value
 
     @staticmethod
-    def __parse_luminosity(sample):
-        value = int(sample[1:])
+    def __parse_luminosity(sample: str) -> float:
+        value = float(sample[1:])
         value /= 100.0
 
         if value < 0.0:
@@ -72,7 +72,7 @@ class PayloadDecoder(object):
         return value
 
     @staticmethod
-    def __parse_status(sample):
+    def __parse_status(sample: str) -> int:
         value = int(sample[1:])
 
         if value < 0 or value > 31:
@@ -81,8 +81,8 @@ class PayloadDecoder(object):
         return value
 
     @staticmethod
-    def __parse_battery(sample):
-        value = int(sample[1:])
+    def __parse_battery(sample: str) -> float:
+        value = float(sample[1:])
         value /= 100.0
 
         if value < 0.00:
@@ -91,7 +91,7 @@ class PayloadDecoder(object):
         return value
 
     @staticmethod
-    def __parse_interval(sample):
+    def __parse_interval(sample: str) -> int:
         value = int(sample[1:])
 
         if value <= 0:
@@ -100,8 +100,8 @@ class PayloadDecoder(object):
         return value
 
     @staticmethod
-    def __parse_uv_radiation(sample):
-        value = int(sample[1:])
+    def __parse_uv_radiation(sample: str) -> float:
+        value = float(sample[1:])
         value /= 100.0
 
         if value < 0.00:
@@ -110,8 +110,8 @@ class PayloadDecoder(object):
         return value
 
     @staticmethod
-    def __parse_pressure(sample):
-        value = int(sample[1:])
+    def __parse_pressure(sample: str) -> float:
+        value = float(sample[1:])
         value /= 100.0
 
         if value < 800.00 or value > 1100:

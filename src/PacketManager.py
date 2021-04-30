@@ -4,7 +4,7 @@ from src.PacketSaver import PacketSaver
 from src.PayloadEncoder import PayloadEncoder
 
 
-def current_milli_time():
+def current_milli_time() -> int:
     return int(round(time() * 1000))
 
 

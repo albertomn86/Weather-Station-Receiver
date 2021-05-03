@@ -1,7 +1,11 @@
+from src.Payload import Payload
+from typing import Any
+
+
 class PayloadEncoder(object):
 
     @staticmethod
-    def encode(payload):
+    def encode(payload: Payload) -> str:
         generated = ""
 
         if payload.battery is not None:
@@ -31,7 +35,7 @@ class PayloadEncoder(object):
         return generated[:-1]
 
 
-def encode_decimal(value):
+def encode_decimal(value: Any) -> str:
     encoded = "{0:.2f}".format(value)
     encoded = encoded.replace(".", "")
     return encoded

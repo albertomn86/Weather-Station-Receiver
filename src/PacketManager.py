@@ -1,4 +1,5 @@
 from time import time
+from src.Config import Config
 from src.Packet import Packet
 from src.PacketSaver import PacketSaver
 from src.PayloadEncoder import PayloadEncoder
@@ -10,7 +11,7 @@ def current_milli_time() -> int:
 
 class PacketManager(object):
 
-    def __init__(self, config):
+    def __init__(self, config: Config):
         self.__config = config
 
     def process_packet(self, packet: Packet, ts=current_milli_time()) -> dict:

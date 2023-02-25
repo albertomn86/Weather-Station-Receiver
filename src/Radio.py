@@ -25,15 +25,15 @@ class Radio(object):
 
     def __send_at_command(self, command):
         GPIO.output(at_pin, GPIO.LOW)
-        self.socket.write(command)
+        self.socket.send_frame(command)
         GPIO.output(at_pin, GPIO.HIGH)
         sleep(0.1)
 
     def __set_power(self, power):
-        self.__send_at_command(f"AT+P{str(power)}".encode())
+        self.__send_at_command(f"AT+P{str(power)}")
 
     def __set_channel(self, channel):
-        self.__send_at_command(f"AT+C{channel}".encode())
+        self.__send_at_command(f"AT+C{channel}")
 
     def __set_mode(self, mode):
-        self.__send_at_command(f"AT+{mode}".encode())
+        self.__send_at_command(f"AT+{mode}")
